@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/containers/coldboxes_container.dart';
 import 'package:mofresh/widgets/app_bar.dart';
 import 'package:mofresh/widgets/cold_box_widget.dart';
 import 'package:mofresh/widgets/searchbar_filter.dart';
@@ -25,13 +26,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       appBar: appBarController(
           context, () {}, "Mo Fresh", Colors.white, Colors.white, Colors.green),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SearchBarWidget(),
-          SectionSelectableWidget(),
-          ColdBoxContainer()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SearchBarWidget(),
+            SectionSelectableWidget(),
+            ColdBoxesContainer()
+          ],
+        ),
       ),
     );
   }

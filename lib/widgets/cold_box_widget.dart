@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ColdBoxContainer extends StatelessWidget {
-  const ColdBoxContainer({Key? key}) : super(key: key);
+  String id;
+  String districtName;
+  String mainPhoto;
+  String provinceName;
+  String sectorName;
+  String storageName;
+  String tag;
+
+  ColdBoxContainer(this.id, this.tag, this.districtName, this.mainPhoto,
+      this.provinceName, this.sectorName, this.storageName,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,35 +40,38 @@ class ColdBoxContainer extends StatelessWidget {
               height: double.infinity,
               width: MediaQuery.of(context).size.width * 0.35,
               child: Image.network(
-                "https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29udGFpbmVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+                mainPhoto,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.55,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "MUHANGA BRANCH",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  storageName,
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.bold),
                 ),
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(20)),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Text(
-                    "Vegetables",
+                    "Meats",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const Text(
-                  "Muhanga Nyamabuye",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Text(
+                  "$provinceName  $districtName",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
             ),
