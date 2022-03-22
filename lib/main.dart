@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
 
 void main() {
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: {"/": (context) => const HomeScreen()},
+      routes: {
+        "/": (context) => const HomeScreen(),
+        "/cold-box-description": (context) => const ColdBoxDescriptionScreen()
+      },
     );
   }
 }

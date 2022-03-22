@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             SearchBarWidget(),
             SectionSelectableWidget(),
             ColdBoxesContainer()
