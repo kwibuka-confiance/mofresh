@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:mofresh/widgets/shimmer_loader.dart';
 
 class ColdBoxesContainer extends StatefulWidget {
-  const ColdBoxesContainer({Key? key}) : super(key: key);
+  ColdBoxesContainer({Key? key}) : super(key: key);
 
   @override
   State<ColdBoxesContainer> createState() => _ColdBoxesContainerState();
@@ -24,6 +24,10 @@ class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
   void initState() {
     gettingAllColdBoxesHandler();
     super.initState();
+  }
+
+  refreshBoxes(BuildContext context) async {
+    gettingAllColdBoxesHandler();
   }
 
   void gettingAllColdBoxesHandler() async {
@@ -51,7 +55,8 @@ class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
                 mainPhoto: element['mainPhoto'].toString(),
                 provinceName: element['provinceName'].toString(),
                 sectorName: element['sectorName'].toString(),
-                storageName: element['storageName'].toString()));
+                storageName: element['storageName'].toString(),
+                storageOverview: element['storageOverview'].toString()));
 
             isLoading = false;
           });
@@ -66,9 +71,12 @@ class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? ShimmerSpinner()
-        : ListView.builder(
+    if (isLoading) {
+      return ShimmerSpinner();
+    } else {
+      return RefreshIndicator(
+        onRefresh: () => refreshBoxes(context),
+        child: ListView.builder(
             shrinkWrap: true,
             primary: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -80,6 +88,9 @@ class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
                 coldBoxes[index].mainPhoto,
                 coldBoxes[index].provinceName,
                 coldBoxes[index].sectorName,
-                coldBoxes[index].storageName));
+                coldBoxes[index].storageName,
+                coldBoxes[index].storageOverview)),
+      );
+    }
   }
 }

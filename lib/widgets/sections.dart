@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/models/tag.dart';
 
 class SectionSelectableWidget extends StatefulWidget {
   const SectionSelectableWidget({Key? key}) : super(key: key);
@@ -16,32 +17,20 @@ class _SectionSelectableWidgetState extends State<SectionSelectableWidget> {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text("Vegetables"),
-            ),
-          ],
+          children: categoryList
+              .map(
+                (e) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    e.tagName,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );

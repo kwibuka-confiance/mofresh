@@ -5,6 +5,7 @@ class ColdBox {
   String provinceName;
   String districtName;
   String sectorName;
+  String storageOverview;
   var tags;
 
   ColdBox(
@@ -14,5 +15,6 @@ class ColdBox {
       required this.mainPhoto,
       required this.provinceName,
       required this.sectorName,
-      required this.storageName});
+      required this.storageName,
+      required this.storageOverview});
 }

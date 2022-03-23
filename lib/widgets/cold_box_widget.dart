@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/models/tag.dart';
 
 class ColdBoxContainer extends StatelessWidget {
   String id;
@@ -7,10 +8,18 @@ class ColdBoxContainer extends StatelessWidget {
   String provinceName;
   String sectorName;
   String storageName;
+  String storageOverview;
   String tag;
 
-  ColdBoxContainer(this.id, this.tag, this.districtName, this.mainPhoto,
-      this.provinceName, this.sectorName, this.storageName,
+  ColdBoxContainer(
+      this.id,
+      this.tag,
+      this.districtName,
+      this.mainPhoto,
+      this.provinceName,
+      this.sectorName,
+      this.storageName,
+      this.storageOverview,
       {Key? key})
       : super(key: key);
 
@@ -26,6 +35,7 @@ class ColdBoxContainer extends StatelessWidget {
           'sectorName': sectorName,
           'storageName': storageName,
           'tag': tag,
+          'storageOverview': storageOverview
         });
       },
       child: Container(
@@ -56,7 +66,7 @@ class ColdBoxContainer extends StatelessWidget {
                   tag: id,
                   child: FadeInImage(
                     placeholder: const AssetImage(
-                        "assets/icons_and_placeholder/placeholderImage.png"),
+                        "assets/icons_and_placeholder/placeholderImage2.png"),
                     image: NetworkImage("https://kivu.mofresh.rw/$mainPhoto"),
                     fit: BoxFit.cover,
                   ),
@@ -75,18 +85,49 @@ class ColdBoxContainer extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 17, fontWeight: FontWeight.bold),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(20)),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Text(
-                      "Meats",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  // Container(
+                  //   width: MediaQuery.of(context).size.width * 0.6,
+                  //   child: Row(
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     children: tagList
+                  //         .map((index) => Container(
+                  //             decoration: BoxDecoration(
+                  //                 color: Colors.green,
+                  //                 borderRadius: BorderRadius.circular(20)),
+                  //             padding: const EdgeInsets.symmetric(
+                  //                 vertical: 10, horizontal: 10),
+                  //             child: Text(
+                  //               index.tagName,
+                  //               style: const TextStyle(
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.bold),
+                  //             )))
+                  //         .toList(),
+                  //   ),
+                  // ),
+                  GridView.builder(
+                      shrinkWrap: true,
+                      primary: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              crossAxisSpacing: 5,
+                              mainAxisSpacing: 5,
+                              childAspectRatio: 2.5,
+                              maxCrossAxisExtent: 100),
+                      itemCount: tagList.length,
+                      itemBuilder: ((context, index) => Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: Text(
+                            tagList[index].tagName,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )))),
                   Text(
                     "$provinceName  $districtName",
                     style: const TextStyle(fontWeight: FontWeight.bold),
