@@ -246,7 +246,7 @@ class _ColdBoxDescriptionScreenState extends State<ColdBoxDescriptionScreen> {
                         child: const Padding(
                           padding: EdgeInsets.all(14.0),
                           child: Text(
-                            "Order Now",
+                            "Book Now",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
