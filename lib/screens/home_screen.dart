@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/containers/changeContainerToColdBox.dart';
 import 'package:mofresh/containers/coldboxes_container.dart';
 import 'package:mofresh/widgets/app_bar.dart';
 import 'package:mofresh/widgets/cold_box_widget.dart';
@@ -30,8 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SearchBarWidget(),
+            const ChangToColdBoxSwitcher(),
             const SectionSelectableWidget(),
+            const SearchBarWidget(),
             ColdBoxesContainer()
           ],
         ),
