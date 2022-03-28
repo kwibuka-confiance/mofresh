@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/containers/booking_containers/business_creation.dart';
 import 'package:mofresh/containers/booking_containers/customerInfo.dart';
 import 'package:mofresh/models/customer_information.dart';
 
@@ -29,9 +30,16 @@ class _SignUpState extends State<SignUp> {
   void savePatientHandler() {}
   @override
   Widget build(BuildContext context) {
+    final routeArguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final status = routeArguments['id'];
     var renderWidgetToDom;
     if (step == 1) {
       renderWidgetToDom = CustomerPageOne(nextStep);
+    }
+
+    if (step == 2) {
+      renderWidgetToDom = BusinessCreationPageTwo(nextStep);
     }
     return Container(
       child: Column(
@@ -39,11 +47,11 @@ class _SignUpState extends State<SignUp> {
           SizedBox(
               height: 150,
               child: Image.asset("assets/icons_and_placeholder/mofresh.png")),
-          const Padding(
-            padding: EdgeInsets.all(20.0),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Text(
-              "Individual",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              status,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           renderWidgetToDom

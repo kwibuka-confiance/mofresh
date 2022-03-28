@@ -41,7 +41,9 @@ class ChoosingBookingStatus extends StatelessWidget {
                                             BorderRadius.circular(25)),
                                     primary: Colors.white),
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed("/booking-screen");
+                                  Navigator.of(context).pushNamed(
+                                      "/booking-screen",
+                                      arguments: {"id": e.status});
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
