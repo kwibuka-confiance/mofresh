@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
 import 'package:mofresh/screens/booking_screen.dart';
+import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/login_screen.dart';
+import 'package:mofresh/screens/mobox_market_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
@@ -29,12 +31,14 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => const WelcomeScreen(),
+        "/sign-up": (context) => const SignUpStarted(),
+        "/choose-company-status": (context) => const ChooseCompany(),
+        "/login": (context) => const Login(),
         "/home": (context) => const HomeScreen(),
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
         "/booking-screen": (context) => const BookingScreen(),
-        "/sign-up": (context) => const SignUpStarted(),
-        "/login": (context) => const Login()
+        "/mofresh-market": (context) => const MoFreshMaerketScreen()
       },
     );
   }

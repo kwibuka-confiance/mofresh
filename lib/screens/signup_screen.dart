@@ -229,7 +229,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                     width: double.infinity,
                     child: Container(
                       child: ElevatedButton(
-                        onPressed: addToSignUpObjectHandler,
+                        onPressed: _continue,
                         child: isLoading == false
                             ? const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 18),
