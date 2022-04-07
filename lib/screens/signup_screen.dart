@@ -25,6 +25,10 @@ class _SignUpStartedState extends State<SignUpStarted> {
       _form.currentState!.save();
     }
 
+    void _continue() {
+      Navigator.of(context).pushNamed("/choose-company-status");
+    }
+
     void _goAndLoginHandler() {
       Navigator.of(context).pushNamed("/login");
     }
