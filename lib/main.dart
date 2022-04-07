@@ -3,6 +3,7 @@ import 'package:mofresh/containers/booking_containers/picking_booking_status_con
 import 'package:mofresh/screens/booking_screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
+import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 
 void main() {
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
       routes: {
-        "/": (context) => const HomeScreen(),
+        "/": (context) => const WelcomeScreen(),
+        "/home": (context) => const HomeScreen(),
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
         "/booking-screen": (context) => const BookingScreen()

@@ -39,7 +39,9 @@ dev_dependencies:
   shimmer: ^2.0.0
   shared_preferences: ^2.0.9
   contained_tab_bar_view: ^0.8.0
+  smooth_page_indicator: ^1.0.0+2
   readmore: ^2.1.0
+  carousel_slider: ^4.0.0
   flutter_test:
     sdk: flutter
 
@@ -66,6 +68,10 @@ flutter:
     - assets/icons_and_placeholder/mofresh.png
     - assets/icons_and_placeholder/placeholderImage_other.png
     - assets/icons_and_placeholder/Group 21.png
+    - assets/illustrations/Group 140.png
+    - assets/illustrations/Group 17.png
+    - assets/illustrations/The Munchies Table for Three.png
+
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
