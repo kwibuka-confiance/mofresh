@@ -30,11 +30,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     void signupButtonHandler() {
-      print("swiftmotion is Here");
+      Navigator.of(context).pushNamed("/sign-up");
     }
 
     void _loginNavigationHandler() {
-      print("Confiance");
+      Navigator.of(context).pushNamed("/login");
     }
 
     return Scaffold(

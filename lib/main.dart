@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
+import 'package:mofresh/containers/booking_containers/signup_creation_container.dart';
 import 'package:mofresh/screens/booking_screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
+import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 
@@ -30,7 +32,8 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const HomeScreen(),
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
-        "/booking-screen": (context) => const BookingScreen()
+        "/booking-screen": (context) => const BookingScreen(),
+        "/sign-up": (context) => const SignUpStarted()
       },
     );
   }
