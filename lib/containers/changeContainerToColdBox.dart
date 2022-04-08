@@ -26,7 +26,7 @@ class _ChangToColdBoxSwitcherState extends State<ChangToColdBoxSwitcher>
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 50, bottom: 20),
+      margin: const EdgeInsets.only(top: 15, bottom: 20),
       width: double.infinity,
       child: Column(
         children: [

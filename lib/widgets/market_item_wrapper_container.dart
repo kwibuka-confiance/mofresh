@@ -54,7 +54,9 @@ class MarketItemWrapper extends StatelessWidget {
                           child: Text(
                             title,
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                color: Colors.black38,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

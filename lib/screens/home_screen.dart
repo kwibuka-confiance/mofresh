@@ -81,7 +81,7 @@ class storageHubScreen extends StatelessWidget {
           title: const Text("MoFresh")),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.only(top: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

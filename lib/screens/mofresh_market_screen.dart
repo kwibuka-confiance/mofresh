@@ -16,6 +16,13 @@ class _MoFreshMarketScreenState extends State<MoFreshMarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColorDark,
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+          ],
+          title: const Text("MoFresh")),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
@@ -23,7 +30,7 @@ class _MoFreshMarketScreenState extends State<MoFreshMarketScreen> {
             children: [
               const ChangToColdBoxSwitcher(),
               const SectionSelectableWidget(),
-              const SearchBarWidget(),
+              // const SearchBarWidget(),
               MofreshColdBox(MOFRESH_BOX, "Mofresh Cold Box"),
               MofreshColdBox(MOFRESH_FRIDGE, "Mofresh Fridge"),
               MofreshColdBox(MOFRESH_CONTAINERS, "Mofresh Containers")

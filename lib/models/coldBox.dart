@@ -64,13 +64,13 @@ List<BoxContainer> MOFRESH_FRIDGE = [
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/2UrzT4MJTqDXq4TF6VPeI2PKgo1dSuPGpb1KOYIA.jpg",
-      storageName: 'MoFresh Box',
+      storageName: 'MoFresh Fridge',
       description: 'In publishing and graphic design, Lorem ipsum is a '),
   BoxContainer(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/3fDoYqoqTCY76MOOvwJPwcze0tebeksjxhmbRoYy.jpg",
-      storageName: 'MoFresh Box',
+      storageName: 'MoFresh Fridge',
       description: 'In publishing and graphic design, Lorem ipsum is a '),
 ];
 
@@ -79,12 +79,12 @@ List<BoxContainer> MOFRESH_CONTAINERS = [
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/iZbHsi7M68MXHq1UVK35X5vEDbI1pO6QBzjlOMSs.jpg",
-      storageName: 'MoFresh Box',
+      storageName: 'MoFresh Container',
       description: 'In publishing and graphic design, Lorem ipsum is a '),
   BoxContainer(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/ajKsGIS7UrxvWD8Rrzp4t9LPBpvAl3aETIGKL3IK.jpg",
-      storageName: 'MoFresh Box',
+      storageName: 'MoFresh Container',
       description: 'In publishing and graphic design, Lorem ipsum is a '),
 ];
