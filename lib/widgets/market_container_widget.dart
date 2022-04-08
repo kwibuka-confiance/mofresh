@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
 
-class ColdBoxContainer extends StatelessWidget {
-  String id;
-  String districtName;
+class ColdBoxContainerMarket extends StatelessWidget {
   String mainPhoto;
-  String provinceName;
-  String sectorName;
-  String storageName;
-  String storageOverview;
-  String tag;
+  String description;
+  String title;
 
-  ColdBoxContainer(
-      this.id,
-      this.tag,
-      this.districtName,
-      this.mainPhoto,
-      this.provinceName,
-      this.sectorName,
-      this.storageName,
-      this.storageOverview,
+  ColdBoxContainerMarket(this.mainPhoto, this.title, this.description,
       {Key? key})
       : super(key: key);
 
@@ -28,14 +15,8 @@ class ColdBoxContainer extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed("/cold-box-description", arguments: {
-          'id': id,
-          "districtName": districtName,
+          "title": title,
           'mainPhoto': mainPhoto,
-          'provinceName': provinceName,
-          'sectorName': sectorName,
-          'storageName': storageName,
-          'tag': tag,
-          'storageOverview': storageOverview
         });
       },
       child: Container(
@@ -63,11 +44,11 @@ class ColdBoxContainer extends StatelessWidget {
                 height: double.infinity,
                 width: MediaQuery.of(context).size.width * 0.35,
                 child: Hero(
-                  tag: id,
+                  tag: 1,
                   child: FadeInImage(
                     placeholder: const AssetImage(
                         "assets/icons_and_placeholder/placeholderImage2.png"),
-                    image: NetworkImage("https://kivu.mofresh.rw/$mainPhoto"),
+                    image: NetworkImage(mainPhoto),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -77,11 +58,11 @@ class ColdBoxContainer extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.55,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    storageName,
+                    title,
                     style: const TextStyle(
                         fontSize: 17, fontWeight: FontWeight.bold),
                   ),
@@ -95,7 +76,7 @@ class ColdBoxContainer extends StatelessWidget {
                               mainAxisSpacing: 5,
                               childAspectRatio: 2.5,
                               maxCrossAxisExtent: 100),
-                      itemCount: tagList.length,
+                      itemCount: categoryTags.length,
                       itemBuilder: ((context, index) => Container(
                           decoration: BoxDecoration(
                               color: Colors.green,
@@ -103,15 +84,30 @@ class ColdBoxContainer extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           child: Text(
-                            tagList[index].tagName,
+                            categoryTags[index].tagName,
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           )))),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
-                    "$provinceName  $districtName",
+                    description,
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                  )
+                  ),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Text(
+                          "Order",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).primaryColorDark),
+                        ),
+                      ))
                 ],
               ),
             )

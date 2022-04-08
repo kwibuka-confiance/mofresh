@@ -31,12 +31,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ChangToColdBoxSwitcher(),
             const SectionSelectableWidget(),
             const SearchBarWidget(),
             ColdBoxesContainer()
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        // onTap: _selectedPage,
+        // currentIndex: selectedIndex,
+        fixedColor: Colors.black,
+        unselectedItemColor: Colors.black54,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Hubs'),
+          BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Storage'),
+          BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'Market'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: 'Profile'),
+        ],
       ),
     );
   }

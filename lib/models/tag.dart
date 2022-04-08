@@ -37,3 +37,10 @@ List<TagSelectable> categoryList = [
       tagImage:
           "https://www.ceps.eu/wp-content/uploads/2021/07/Healthcare-and-pharmaceuticals-img-1300x731.jpg"),
 ];
+
+List<TagSelectable> categoryTags = [
+  TagSelectable(
+      tagName: "Vegetables",
+      tagImage:
+          "https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg"),
+];

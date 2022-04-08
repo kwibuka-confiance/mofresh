@@ -17,7 +17,7 @@ class MarketItemWrapper extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Color.fromARGB(255, 241, 241, 241)),
+              color: const Color.fromARGB(255, 241, 241, 241)),
           // color: Colors.amber,
           // height: 250,
           width: MediaQuery.of(context).size.width * 0.42,

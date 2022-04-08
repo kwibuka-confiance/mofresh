@@ -13,7 +13,7 @@ class _ChangToColdBoxSwitcherState extends State<ChangToColdBoxSwitcher>
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -26,31 +26,36 @@ class _ChangToColdBoxSwitcherState extends State<ChangToColdBoxSwitcher>
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, bottom: 20),
+      margin: const EdgeInsets.only(top: 50, bottom: 20),
       width: double.infinity,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(2),
-            width: MediaQuery.of(context).size.width * 0.7,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Theme.of(context).primaryColorDark),
+            // width: MediaQuery.of(context).size.width,
+            // decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(25), color: Colors.cyan),
             child: Column(
               children: [
                 TabBar(
                     controller: tabController,
-                    labelColor: const Color.fromRGBO(253, 178, 24, 1),
-                    unselectedLabelColor: Colors.white,
+                    labelColor: Color.fromARGB(255, 255, 255, 255),
+                    unselectedLabelColor: Colors.black,
                     indicator: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColorDark,
                         borderRadius: BorderRadius.circular(25)),
                     tabs: const [
                       Tab(
-                        text: "Cold Storage",
+                        text: "Cold Box",
                       ),
                       Tab(
-                        text: "Cold Box",
+                        text: "Fridge",
+                      ),
+                      Tab(
+                        text: "Containers",
+                      ),
+                      Tab(
+                        text: "Plate",
                       ),
                     ])
               ],
