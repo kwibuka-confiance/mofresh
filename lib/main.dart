@@ -5,7 +5,7 @@ import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/login_screen.dart';
-import 'package:mofresh/screens/mobox_market_screen.dart';
+import 'package:mofresh/screens/mofresh_market_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
         "/booking-screen": (context) => const BookingScreen(),
-        "/mofresh-market": (context) => const MoFreshMaerketScreen()
+        "/mofresh-market": (context) => const MoFreshMarketScreen()
       },
     );
   }
