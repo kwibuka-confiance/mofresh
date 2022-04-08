@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
 import 'package:mofresh/screens/booking_screen.dart';
+import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/login_screen.dart';
+import 'package:mofresh/screens/mofresh_market_details_screen.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
@@ -38,7 +40,9 @@ class MyApp extends StatelessWidget {
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
         "/booking-screen": (context) => const BookingScreen(),
-        "/mofresh-market": (context) => const MoFreshMarketScreen()
+        "/mofresh-market": (context) => const MoFreshMarketScreen(),
+        "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
+        "/cart-screen": (context) => const CartScreen()
       },
     );
   }

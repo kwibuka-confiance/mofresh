@@ -30,9 +30,9 @@ class _SignUpState extends State<SignUp> {
   void savePatientHandler() {}
   @override
   Widget build(BuildContext context) {
-    final routeArguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final status = routeArguments['id'];
+    // final routeArguments =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    // final status = routeArguments['id'];
     var renderWidgetToDom;
     if (step == 1) {
       renderWidgetToDom = CustomerPageOne(nextStep);
@@ -47,11 +47,11 @@ class _SignUpState extends State<SignUp> {
           SizedBox(
               height: 150,
               child: Image.asset("assets/icons_and_placeholder/mofresh.png")),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Text(
-              status,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              "Business Information",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           renderWidgetToDom
