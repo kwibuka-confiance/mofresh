@@ -15,10 +15,10 @@ class _MarketScreenState extends State<MarketScreen> {
           foregroundColor: Colors.white,
           backgroundColor: Theme.of(context).primaryColorDark,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
           ],
           title: const Text("MoFresh")),
-      body: Center(child: Text("Our Market Comming Soon")),
+      body: const Center(child: Text("Our Market Comming Soon")),
     );
   }
 }

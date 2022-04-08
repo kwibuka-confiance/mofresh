@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mofresh/containers/changeContainerToColdBox.dart';
 import 'package:mofresh/containers/coldboxes_container.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
+import 'package:mofresh/screens/original_market.dart';
 import 'package:mofresh/screens/profile_screen.dart';
 import 'package:mofresh/widgets/app_bar.dart';
 import 'package:mofresh/widgets/cold_box_widget.dart';
@@ -28,10 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _page = [
-      storageHubScreen(),
-      MoFreshMarketScreen(),
-      storageHubScreen(),
-      ProfileScreen()
+      const storageHubScreen(),
+      const MoFreshMarketScreen(),
+      const MarketScreen(),
+      const ProfileScreen()
     ];
 
     return Scaffold(
@@ -70,14 +71,26 @@ class storageHubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionSelectableWidget(),
-          const SearchBarWidget(),
-          ColdBoxesContainer()
-        ],
+    return Scaffold(
+      appBar: AppBar(
+          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColorDark,
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+          ],
+          title: const Text("MoFresh")),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionSelectableWidget(),
+              const SearchBarWidget(),
+              ColdBoxesContainer()
+            ],
+          ),
+        ),
       ),
     );
   }

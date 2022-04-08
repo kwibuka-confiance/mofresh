@@ -12,21 +12,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String? username = 'ABC';
-  String? useraccount = '';
+  String? username = 'Kwibuka Confiance';
+  String? useraccount = 'djconfiance@gmail.com';
   @override
   void initState() {
     super.initState();
 
-    void getUser() async {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      setState(() {
-        username = pref.getString("username").toString();
-        useraccount = pref.getString("useraccount").toString();
-      });
-    }
+    // void getUser() async {
+    //   SharedPreferences pref = await SharedPreferences.getInstance();
+    //   setState(() {
+    //     username = pref.getString("username").toString();
+    //     useraccount = pref.getString("useraccount").toString();
+    //   });
+    // }
 
-    getUser();
+    // getUser();
   }
 
   @override
@@ -43,11 +43,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Container(
                 padding: const EdgeInsets.only(top: 24),
                 constraints: const BoxConstraints(minHeight: 200),
-                color: Colors.lightGreen,
+                color: Theme.of(context).primaryColorDark,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       IconButton(
+                          color: Colors.white,
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
