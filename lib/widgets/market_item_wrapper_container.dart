@@ -10,22 +10,22 @@ class MarketItemWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20),
       child: Material(
         elevation: 2,
         borderRadius: BorderRadius.circular(10),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Color.fromARGB(255, 228, 228, 228)),
+              color: Color.fromARGB(255, 241, 241, 241)),
           // color: Colors.amber,
-          height: 250,
-          width: MediaQuery.of(context).size.width * 0.5,
+          // height: 250,
+          width: MediaQuery.of(context).size.width * 0.42,
           child: Column(
             children: [
               Container(
                 height: 140,
-                width: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.42,
                 child: Image.network(
                   imageUrl,
                   fit: BoxFit.cover,
@@ -37,7 +37,7 @@ class MarketItemWrapper extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     ),
-                    color: Color.fromARGB(255, 228, 228, 228)),
+                    color: Color.fromARGB(255, 241, 241, 241)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(
@@ -58,17 +58,20 @@ class MarketItemWrapper extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: Text(
                         description,
-                        // style: TextStyle(backgroundColor: Colors.amber),
+                        style: const TextStyle(height: 1.5),
                       ),
                     ),
                     Align(
                         alignment: Alignment.center,
-                        child: Text(
-                          "Order",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColorDark),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            "Order",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Theme.of(context).primaryColorDark),
+                          ),
                         ))
                   ],
                 ),

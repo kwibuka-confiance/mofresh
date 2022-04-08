@@ -3,6 +3,7 @@ import 'package:mofresh/containers/changeContainerToColdBox.dart';
 import 'package:mofresh/containers/mofresh_coldbox.dart';
 import 'package:mofresh/widgets/searchbar_filter.dart';
 import 'package:mofresh/widgets/sections.dart';
+import 'package:mofresh/models/coldBox.dart';
 
 class MoFreshMarketScreen extends StatefulWidget {
   const MoFreshMarketScreen({Key? key}) : super(key: key);
@@ -23,7 +24,8 @@ class _MoFreshMarketScreenState extends State<MoFreshMarketScreen> {
               const ChangToColdBoxSwitcher(),
               const SectionSelectableWidget(),
               const SearchBarWidget(),
-              const MofreshColdBox()
+              MofreshColdBox(MOFRESH_BOX, "Mofresh Cold Box"),
+              MofreshColdBox(MOFRESH_FRIDGE, "Mofresh Fridge"),
             ],
           ),
         ),

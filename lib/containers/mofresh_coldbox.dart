@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mofresh/models/coldBox.dart';
 import 'package:mofresh/widgets/market_item_wrapper_container.dart';
 
 class MofreshColdBox extends StatefulWidget {
-  const MofreshColdBox({Key? key}) : super(key: key);
+  List MOFRESH_BOXES;
+  String title;
+  MofreshColdBox(this.MOFRESH_BOXES, this.title, {Key? key}) : super(key: key);
 
   @override
   State<MofreshColdBox> createState() => _MofreshColdBoxState();
@@ -14,6 +15,7 @@ class _MofreshColdBoxState extends State<MofreshColdBox> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      padding: EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,9 +25,10 @@ class _MofreshColdBoxState extends State<MofreshColdBox> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Mofresh ColdBox",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Text(
+                  widget.title,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   "View All",
@@ -37,7 +40,7 @@ class _MofreshColdBoxState extends State<MofreshColdBox> {
           SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  children: MOFRESH_BOX
+                  children: widget.MOFRESH_BOXES
                       .map(
                         (element) => MarketItemWrapper(element.mainPhoto,
                             element.storageName, element.description),
