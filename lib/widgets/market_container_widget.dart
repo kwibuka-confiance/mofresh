@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
+import 'package:mofresh/utils/URL.dart';
+import 'package:mofresh/widgets/shimmer_loader.dart';
 
 class ColdBoxContainerMarket extends StatelessWidget {
   String mainPhoto;
@@ -48,7 +50,7 @@ class ColdBoxContainerMarket extends StatelessWidget {
                   child: FadeInImage(
                     placeholder: const AssetImage(
                         "assets/icons_and_placeholder/placeholderImage2.png"),
-                    image: NetworkImage(mainPhoto),
+                    image: NetworkImage("${Mofresh.imageUrlAPI}$mainPhoto"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -94,7 +96,7 @@ class ColdBoxContainerMarket extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    description,
+                    description.substring(0, 100),
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Align(

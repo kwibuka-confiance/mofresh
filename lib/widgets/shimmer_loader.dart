@@ -2,7 +2,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 
 class ShimmerSpinner extends StatelessWidget {
-  ShimmerSpinner({Key? key}) : super(key: key);
+  const ShimmerSpinner({Key? key}) : super(key: key);
 
   containerShimmer(BuildContext context) {
     return Container(
@@ -47,7 +47,7 @@ class ShimmerSpinner extends StatelessWidget {
                     child: Container(
                         decoration: BoxDecoration(
                             color: Colors.green,
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(0)),
                         child: Container(
                           height: 20,
                         )),
@@ -97,5 +97,110 @@ class ShimmerSpinner extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 3,
         itemBuilder: (context, index) => containerShimmer(context));
+  }
+}
+
+class BoxesDataShimmer extends StatelessWidget {
+  const BoxesDataShimmer({Key? key}) : super(key: key);
+
+  containerShimmerBox(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 20),
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color.fromARGB(255, 241, 241, 241)),
+          width: MediaQuery.of(context).size.width * 0.42,
+          child: Column(
+            children: [
+              Container(
+                height: 140,
+                width: MediaQuery.of(context).size.width * 0.42,
+                child: Shimmer.fromColors(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Container()),
+                    baseColor: Colors.grey[200]!,
+                    highlightColor: Colors.grey[300]!),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    color: Color.fromARGB(255, 241, 241, 241)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: Shimmer.fromColors(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Container(
+                                  height: 20,
+                                )),
+                            baseColor: Colors.grey[200]!,
+                            highlightColor: Colors.grey[300]!),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Shimmer.fromColors(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Container(
+                                height: 20,
+                              )),
+                          baseColor: Colors.grey[200]!,
+                          highlightColor: Colors.grey[300]!),
+                    ),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Shimmer.fromColors(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Container(
+                                    height: 20,
+                                  )),
+                              baseColor: Colors.grey[200]!,
+                              highlightColor: Colors.grey[300]!),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(children: [
+        containerShimmerBox(context),
+        containerShimmerBox(context),
+      ]),
+    );
   }
 }

@@ -1,14 +1,20 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mofresh/utils/URL.dart';
 import 'package:mofresh/widgets/cold_box_widget.dart';
 import 'package:mofresh/widgets/market_container_widget.dart';
 import 'package:mofresh/widgets/market_item_wrapper_container.dart';
+import 'package:mofresh/widgets/shimmer_loader.dart';
 
 class MofreshColdBox extends StatefulWidget {
   List MOFRESH_MIX_ELEMENTS;
   String title;
-  MofreshColdBox(this.MOFRESH_MIX_ELEMENTS, this.title, {Key? key})
+  bool isLoading;
+
+  MofreshColdBox(this.MOFRESH_MIX_ELEMENTS, this.title, this.isLoading,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -44,16 +50,18 @@ class _MofreshColdBoxState extends State<MofreshColdBox> {
           ),
           SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                  children: widget.MOFRESH_MIX_ELEMENTS
-                      .map(
-                        (element) => widget.title == "Mofresh Containers"
-                            ? ColdBoxContainerMarket(element.mainPhoto,
-                                element.storageName, element.description)
-                            : MarketItemWrapper(element.mainPhoto,
-                                element.storageName, element.description),
-                      )
-                      .toList())),
+              child: widget.isLoading
+                  ? const BoxesDataShimmer()
+                  : Row(
+                      children: widget.MOFRESH_MIX_ELEMENTS
+                          .map(
+                            (element) => widget.title == "Mofresh Containers"
+                                ? ColdBoxContainerMarket(element.mainPhoto,
+                                    element.storageName, element.description)
+                                : MarketItemWrapper(element.mainPhoto,
+                                    element.storageName, element.description),
+                          )
+                          .toList())),
         ],
       ),
     );

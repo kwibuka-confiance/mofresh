@@ -32,26 +32,39 @@ class BoxContainer {
       required this.description});
 }
 
-List<BoxContainer> MOFRESH_BOX = [
-  BoxContainer(
+class Box {
+  String id;
+  String storageName;
+  String mainPhoto;
+  String description;
+
+  Box(
+      {required this.id,
+      required this.mainPhoto,
+      required this.storageName,
+      required this.description});
+}
+
+List<Box> MOFRESH_BOX = [
+  Box(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/img/mS3zTr8t1xNqjXLfanoqAh9mGVFu9otwWmorhVnn.jpg",
       storageName: 'MoFresh Box',
       description: 'In publishing and graphic design, Lorem ipsum is a real '),
-  BoxContainer(
+  Box(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/qWMekFYf2WqSq42PAhhQPYB8hkRe3JyCaCkLrKYG.jpg",
       storageName: 'MoFresh Box',
       description: 'In publishing and graphic design, Lorem ipsum is a real '),
-  BoxContainer(
+  Box(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/img/mS3zTr8t1xNqjXLfanoqAh9mGVFu9otwWmorhVnn.jpg",
       storageName: 'MoFresh Box',
       description: 'In publishing and graphic design, Lorem ipsum is a '),
-  BoxContainer(
+  Box(
       id: '1',
       mainPhoto:
           "https://kivu.mofresh.rw/box/qWMekFYf2WqSq42PAhhQPYB8hkRe3JyCaCkLrKYG.jpg",

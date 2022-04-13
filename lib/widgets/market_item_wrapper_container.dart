@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/utils/URL.dart';
 
 class MarketItemWrapper extends StatelessWidget {
   String imageUrl;
@@ -22,8 +23,6 @@ class MarketItemWrapper extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: const Color.fromARGB(255, 241, 241, 241)),
-            // color: Colors.amber,
-            // height: 250,
             width: MediaQuery.of(context).size.width * 0.42,
             child: Column(
               children: [
@@ -31,7 +30,7 @@ class MarketItemWrapper extends StatelessWidget {
                   height: 140,
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: Image.network(
-                    imageUrl,
+                    "${Mofresh.imageUrlAPI}$imageUrl",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -63,7 +62,7 @@ class MarketItemWrapper extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Text(
-                          description,
+                          description.substring(0, 60),
                           style: const TextStyle(height: 1.5),
                         ),
                       ),
