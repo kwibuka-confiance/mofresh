@@ -12,7 +12,11 @@ class MarketItemWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed("/mofresh-market-details");
+        Navigator.of(context).pushNamed("/mofresh-market-details", arguments: {
+          "title": title,
+          "imageUrl": imageUrl,
+          "description": description
+        });
       },
       child: Container(
         padding: const EdgeInsets.only(left: 20),

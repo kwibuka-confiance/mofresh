@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:mofresh/containers/coldbox_features_type_container.dart';
+import 'package:mofresh/utils/URL.dart';
 import 'package:mofresh/widgets/booking_rent.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:indexed/indexed.dart';
@@ -14,14 +15,17 @@ class MarketBoxDetailsScreen extends StatefulWidget {
 
 class _MarketBoxDetailsScreenState extends State<MarketBoxDetailsScreen> {
   int activeIndex = 0;
-  final List _imageUrls = [
-    'https://kivu.mofresh.rw/box/qWMekFYf2WqSq42PAhhQPYB8hkRe3JyCaCkLrKYG.jpg',
-    'https://kivu.mofresh.rw/box/qWMekFYf2WqSq42PAhhQPYB8hkRe3JyCaCkLrKYG.jpg',
-    'https://kivu.mofresh.rw/box/qWMekFYf2WqSq42PAhhQPYB8hkRe3JyCaCkLrKYG.jpg'
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final title = routeArgs['title'];
+    final description = routeArgs['description'];
+    final imageUrl = "${Mofresh.imageUrlAPI}${routeArgs['imageUrl']}";
+
+    final List _imageUrls = [imageUrl, imageUrl, imageUrl];
+
     return Scaffold(
       body: Stack(children: [
         CustomScrollView(
@@ -88,9 +92,9 @@ class _MarketBoxDetailsScreenState extends State<MarketBoxDetailsScreen> {
                 centerTitle: false,
                 title: Container(
                     width: double.infinity,
-                    child: const Text(
-                      "Motion",
-                      style: TextStyle(color: Colors.white),
+                    child: Text(
+                      title,
+                      style: const TextStyle(color: Colors.white),
                     )),
               ),
             ),
@@ -105,16 +109,16 @@ class _MarketBoxDetailsScreenState extends State<MarketBoxDetailsScreen> {
                     borderRadius: BorderRadius.circular(20),
                     color: const Color.fromRGBO(217, 225, 228, 1)),
                 child: Column(
-                  children: const [
-                    Padding(
+                  children: [
+                    const Padding(
                       padding: EdgeInsets.only(top: 10.0, bottom: 10),
                       child: Text("Description",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20)),
                     ),
                     Text(
-                      "Different things and vegetables require different temperatures.In general, it can be divided into the following three categories roughly if you have enough space; we suggest you make compartments for different vegetables.",
-                      style: TextStyle(fontSize: 17),
+                      description,
+                      style: const TextStyle(fontSize: 17),
                       textAlign: TextAlign.justify,
                     ),
                   ],
