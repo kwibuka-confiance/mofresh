@@ -151,8 +151,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                               borderRadius:
                                                   BorderRadius.circular(305)),
                                           labelText: 'Enter email',
-                                          suffixIcon:
-                                              const Icon(Icons.account_box),
+                                          suffixIcon: const Icon(Icons.email),
                                           labelStyle:
                                               const TextStyle(fontSize: 12),
                                           isDense: true,
@@ -163,7 +162,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                       textInputAction: TextInputAction.next,
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Fill your email';
+                                          return 'Fill the email';
                                         }
 
                                         return null;
@@ -191,8 +190,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                               borderRadius:
                                                   BorderRadius.circular(305)),
                                           labelText: 'Enter password',
-                                          suffixIcon:
-                                              const Icon(Icons.account_box),
+                                          suffixIcon: const Icon(Icons.lock),
                                           labelStyle:
                                               const TextStyle(fontSize: 12),
                                           isDense: true,
@@ -213,8 +211,8 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                         _userInformation = UserInformations(
                                           firstName: _userInformation.firstName,
                                           lastName: _userInformation.lastName,
-                                          email: value.toString(),
-                                          password: _userInformation.password,
+                                          email: _userInformation.email,
+                                          password: value.toString(),
                                         );
                                       },
                                     ),
