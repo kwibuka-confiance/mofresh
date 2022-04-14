@@ -20,13 +20,16 @@ class _SignUpStartedState extends State<SignUpStarted> {
 
   @override
   Widget build(BuildContext context) {
-    void addToSignUpObjectHandler() {
+    void _continue() {
       var validateForm = _form.currentState!.validate();
       _form.currentState!.save();
-    }
-
-    void _continue() {
-      Navigator.of(context).pushNamed("/choose-company-status");
+      // Navigator.of(context).pushNamed("/choose-company-status");
+      print(
+        _userInformation.firstName,
+      );
+      print(_userInformation.lastName);
+      print(_userInformation.email);
+      print(_userInformation.password);
     }
 
     void _goAndLoginHandler() {
@@ -198,6 +201,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                   // vertical: 4,
                                                   horizontal: 20)),
                                       textInputAction: TextInputAction.next,
+                                      obscureText: true,
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'Fill the password';
