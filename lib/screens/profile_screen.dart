@@ -13,20 +13,31 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? username = 'Kwibuka Confiance';
-  String? useraccount = 'djconfiance@gmail.com';
+
+  late String usernameG = '';
+  late String statusG = '';
+  late String contactG = '';
+  late String clientNamesG = '';
   @override
   void initState() {
     super.initState();
 
-    // void getUser() async {
-    //   SharedPreferences pref = await SharedPreferences.getInstance();
-    //   setState(() {
-    //     username = pref.getString("username").toString();
-    //     useraccount = pref.getString("useraccount").toString();
-    //   });
-    // }
+    void getUser() async {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final String? username = pref.getString('username');
+      final String? status = pref.getString('status');
+      final String? contact = pref.getString('contact');
+      final String? clientNames = pref.getString('clientNames');
 
-    // getUser();
+      setState(() {
+        usernameG = username!;
+        statusG = status!;
+        contactG = contact!;
+        clientNamesG = clientNames!;
+      });
+    }
+
+    getUser();
   }
 
   @override
@@ -65,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: Text(
-                                      username!.toUpperCase(),
+                                      clientNamesG!.toUpperCase() ?? '',
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
@@ -85,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          useraccount!,
+                                          usernameG!,
                                           style: const TextStyle(
                                               color: Colors.white),
                                         ),

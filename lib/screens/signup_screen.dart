@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/utils/URL.dart';
 import '../models/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:http/http.dart' as http;
 
 class SignUpStarted extends StatefulWidget {
@@ -24,36 +24,44 @@ class _SignUpStartedState extends State<SignUpStarted> {
   @override
   Widget build(BuildContext context) {
     void _continue() async {
-      setState(() {
-        isLoading = true;
-      });
-      var validateForm = _form.currentState!.validate();
-      _form.currentState!.save();
-
-      if (validateForm) {
-        await http
-            .post(Uri.parse('${Mofresh.url2}addClient2'),
-                body: ({
-                  "clientNames":
-                      '${_userInformation.firstName} ${_userInformation.lastName} ',
-                  "clientContact": _userInformation.phoneNumber,
-                  "clientEmail": _userInformation.email,
-                  "clientUsername": _userInformation.email,
-                  "clientPassword": _userInformation.password
-                }))
-            .then((value) {
-          setState(() {
-            isLoading = false;
-          });
-          Navigator.of(context).pushNamed("/choose-company-status", arguments: {
-            "clientNames":
-                '${_userInformation.firstName} ${_userInformation.lastName} ',
-            "clientContact": _userInformation.phoneNumber,
-            "clientEmail": _userInformation.email,
-            "clientUsername": _userInformation.email,
-            "clientPassword": _userInformation.password
-          });
+      try {
+        setState(() {
+          isLoading = true;
         });
+        var validateForm = _form.currentState!.validate();
+        _form.currentState!.save();
+
+        if (validateForm) {
+          await http
+              .post(Uri.parse('${Mofresh.url2}addClient2'),
+                  body: ({
+                    "clientNames":
+                        '${_userInformation.firstName} ${_userInformation.lastName} ',
+                    "clientContact": _userInformation.phoneNumber,
+                    "clientEmail": _userInformation.email,
+                    "clientUsername": _userInformation.email,
+                    "clientPassword": _userInformation.password
+                  }))
+              .then((value) {
+            setState(() {
+              isLoading = false;
+            });
+            Navigator.of(context)
+                .pushNamed("/choose-company-status", arguments: {
+              "clientNames":
+                  '${_userInformation.firstName} ${_userInformation.lastName} ',
+              "clientContact": _userInformation.phoneNumber,
+              "clientEmail": _userInformation.email,
+              "clientUsername": _userInformation.email,
+              "clientPassword": _userInformation.password
+            });
+          });
+        }
+      } catch (error) {
+        setState(() {
+          isLoading = false;
+        });
+        print(error);
       }
     }
 
@@ -317,6 +325,9 @@ class _SignUpStartedState extends State<SignUpStarted> {
                         )),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               Column(
                 children: [

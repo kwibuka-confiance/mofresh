@@ -10,19 +10,73 @@ import 'package:mofresh/screens/mofresh_market_details_screen.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
+import 'package:mofresh/ui_widgets/waiting-page.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late String routeNameGlobal = '';
+  late String usernameG = '';
+  late String statusG = '';
+  late String contactG = '';
+
+  @override
+  void initState() {
+    getAvailableTokenHandler();
+    super.initState();
+  }
+
+  getAvailableTokenHandler() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    final String? username = pref.getString('username');
+    final String? status = pref.getString('status');
+    final String? contact = pref.getString('contact');
+
+    setState(() {
+      usernameG = username!;
+      statusG = status!;
+      contactG = contact!;
+    });
+
+    dashboardChoosen() {
+      var routeName = '/login';
+      if (username!.isNotEmpty &&
+          statusG.isNotEmpty &&
+          statusG == "INDIVIDUAL") {
+        return routeName = "/home";
+      } else if (username.isNotEmpty &&
+          statusG.isNotEmpty &&
+          statusG != "INDIVIDUAL") {
+        return routeName = '/mofresh-market';
+      } else if (contact!.isEmpty) {
+        return routeName = 'welcome';
+      }
+      return routeName;
+    }
+
+    setState(() {
+      routeNameGlobal = dashboardChoosen();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     MaterialColor primayColor = MaterialColor(0xFF7CB211, color);
+    print(contactG);
+    print(usernameG);
+
+    print(statusG);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -31,8 +85,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: primayColor,
         fontFamily: 'Poppins',
       ),
+      home: WaitingPage(routeNameGlobal),
       routes: {
-        "/": (context) => const WelcomeScreen(),
+        "/welcome": (context) => const WelcomeScreen(),
         "/sign-up": (context) => const SignUpStarted(),
         "/choose-company-status": (context) => const ChooseCompany(),
         "/login": (context) => const Login(),

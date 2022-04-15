@@ -33,10 +33,13 @@ class _ChooseCompanyState extends State<ChooseCompany> {
     final clientContact = signUpArgs['clientContact'];
     final clientEmail = signUpArgs['clientEmail'];
     final clientUsername = signUpArgs['clientUsername'];
+    final clientNames = signUpArgs['clientNames'];
 
     void sendToPreferences() async {
       SharedPreferences pref = await SharedPreferences.getInstance();
       await pref.setString("username", clientUsername);
+      await pref.setString("clientNames", clientNames);
+
       await pref.setString("contact", clientContact);
       await pref.setString("email", clientEmail);
       await pref.setString("status", name);
