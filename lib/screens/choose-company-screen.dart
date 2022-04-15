@@ -76,6 +76,14 @@ class _ChooseCompanyState extends State<ChooseCompany> {
 
   @override
   Widget build(BuildContext context) {
+    final signUpArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final clientNames = signUpArgs['clientNames'];
+    final clientContact = signUpArgs['clientContact'];
+    final clientEmail = signUpArgs['clientEmail'];
+    final clientUsername = signUpArgs['clientUsername'];
+    final clientPassword = signUpArgs['clientPassword'];
+
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
