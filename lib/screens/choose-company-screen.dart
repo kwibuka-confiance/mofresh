@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/continueAs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChooseCompany extends StatefulWidget {
   const ChooseCompany({Key? key}) : super(key: key);
@@ -27,13 +28,28 @@ class _ChooseCompanyState extends State<ChooseCompany> {
         imageUrl: "assets/illustrations/Illustration - Asset 30 1.png"),
   ];
 
-  Widget continueAsWidget(BuildContext context, name, description, imageUrl) {
+  Widget continueAsWidget(
+      BuildContext context, name, description, imageUrl, signUpArgs) {
+    final clientContact = signUpArgs['clientContact'];
+    final clientEmail = signUpArgs['clientEmail'];
+    final clientUsername = signUpArgs['clientUsername'];
+
+    void sendToPreferences() async {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString("username", clientUsername);
+      await pref.setString("contact", clientContact);
+      await pref.setString("email", clientEmail);
+      await pref.setString("status", name);
+    }
+
     return InkWell(
-      onTap: () {
+      onTap: () async {
         if (name == "COMPANY" || name == "COOPERATIVE") {
-          Navigator.of(context).pushReplacementNamed('/home');
+          sendToPreferences();
+          await Navigator.of(context).pushReplacementNamed('/home');
         } else {
-          Navigator.of(context).pushReplacementNamed('/mofresh-market');
+          sendToPreferences();
+          await Navigator.of(context).pushReplacementNamed('/mofresh-market');
         }
       },
       child: Container(
@@ -78,11 +94,6 @@ class _ChooseCompanyState extends State<ChooseCompany> {
   Widget build(BuildContext context) {
     final signUpArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final clientNames = signUpArgs['clientNames'];
-    final clientContact = signUpArgs['clientContact'];
-    final clientEmail = signUpArgs['clientEmail'];
-    final clientUsername = signUpArgs['clientUsername'];
-    final clientPassword = signUpArgs['clientPassword'];
 
     return Scaffold(
         body: Column(
@@ -101,7 +112,7 @@ class _ChooseCompanyState extends State<ChooseCompany> {
             Column(
               children: cardsItems
                   .map((element) => continueAsWidget(context, element.name,
-                      element.description, element.imageUrl))
+                      element.description, element.imageUrl, signUpArgs))
                   .toList(),
             ),
           ],
