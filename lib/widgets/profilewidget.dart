@@ -10,7 +10,7 @@ class UserTaskWidget extends StatelessWidget {
   void logoutHandler(BuildContext context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove('username');
-    pref.setString("logout", "loggedout");
+    pref.setString("logged", "loggedOut");
     Navigator.of(context).pushReplacementNamed('/login');
   }
 

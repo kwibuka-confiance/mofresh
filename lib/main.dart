@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
     final String? username = pref.getString('username');
     final String? status = pref.getString('status');
     final String? contact = pref.getString('contact');
+    final String? logged = pref.getString("logged");
 
     setState(() {
       usernameG = username!;
@@ -60,7 +61,10 @@ class _MyAppState extends State<MyApp> {
           statusG != "INDIVIDUAL") {
         return routeName = '/mofresh-market';
       } else if (contact!.isEmpty) {
-        return routeName = 'welcome';
+        return routeName = '/welcome';
+      }
+      if (username.isEmpty && logged == 'loggedOut') {
+        return routeName = '/login';
       }
       return routeName;
     }
