@@ -257,7 +257,8 @@ class _CartScreenState extends State<CartScreen> {
                                     child: Container(
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          next();
+                                          Navigator.of(context)
+                                              .pushNamed('/payment-sucess');
                                         },
                                         child: const Padding(
                                           padding: EdgeInsets.symmetric(

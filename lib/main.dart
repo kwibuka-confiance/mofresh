@@ -9,6 +9,7 @@ import 'package:mofresh/screens/login_screen.dart';
 import 'package:mofresh/screens/mofresh_market_details_screen.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
+import 'package:mofresh/screens/successful_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/ui_widgets/waiting-page.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
@@ -95,7 +96,8 @@ class _MyAppState extends State<MyApp> {
         "/booking-screen": (context) => const BookingScreen(),
         "/mofresh-market": (context) => const MoFreshMarketScreen(),
         "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
-        "/cart-screen": (context) => const CartScreen()
+        "/cart-screen": (context) => const CartScreen(),
+        "/payment-sucess": (context) => const SuccessfulScreen(),
       },
     );
   }
