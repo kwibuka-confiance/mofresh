@@ -148,10 +148,54 @@ class _CartScreenState extends State<CartScreen> {
                                 topRight: Radius.circular(25))),
                         child: Column(
                           children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Total",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    'RWF ${totalAmount.toString()}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 1,
+                              color: Colors.black,
+                              margin: const EdgeInsets.only(bottom: 10),
+                            ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  child: Image.asset('name'),
+                                  width: 60,
+                                  child: Image.asset(
+                                      'assets/paymentStuff/momo.png'),
+                                ),
+                                Container(
+                                  width: 60,
+                                  child: Image.asset(
+                                      'assets/paymentStuff/visa.jpg'),
+                                ),
+                                Container(
+                                  width: 60,
+                                  child: Image.asset(
+                                      'assets/paymentStuff/PayPal.png'),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  width: 60,
+                                  child: Image.asset(
+                                      'assets/paymentStuff/MasterCard.png'),
                                 )
                               ],
                             )

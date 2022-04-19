@@ -75,6 +75,10 @@ flutter:
     - assets/illustrations/Illustration - Asset 30 1.png
     - assets/illustrations/Illustration - pavan 675.png
     - assets/illustrations/Group 17.png
+    - assets/paymentStuff/momo.png
+    - assets/paymentStuff/PayPal.png
+    - assets/paymentStuff/visa.jpg
+    - assets/paymentStuff/MasterCard.png
 
     # - images/a_dot_ham.jpeg
 
