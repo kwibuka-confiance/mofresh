@@ -16,7 +16,7 @@ packages:
     source: hosted
     version: "2.1.0"
   carousel_slider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: carousel_slider
       url: "https://pub.dartlang.org"
@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "1.15.0"
   contained_tab_bar_view:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: contained_tab_bar_view
       url: "https://pub.dartlang.org"
@@ -115,7 +115,7 @@ packages:
     source: sdk
     version: "0.0.0"
   http:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -129,7 +129,7 @@ packages:
     source: hosted
     version: "4.0.0"
   indexed:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: indexed
       url: "https://pub.dartlang.org"
@@ -170,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -219,15 +226,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.2"
   readmore:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: readmore
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
   shared_preferences:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
@@ -283,7 +297,7 @@ packages:
     source: hosted
     version: "2.1.0"
   shimmer:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: shimmer
       url: "https://pub.dartlang.org"
@@ -295,7 +309,7 @@ packages:
     source: sdk
     version: "0.0.99"
   smooth_page_indicator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: smooth_page_indicator
       url: "https://pub.dartlang.org"

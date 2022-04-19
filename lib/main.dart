@@ -52,18 +52,13 @@ class _MyAppState extends State<MyApp> {
 
     dashboardChoosen() {
       var routeName = '/login';
-      if (username!.isNotEmpty &&
-          statusG.isNotEmpty &&
-          statusG == "INDIVIDUAL") {
-        return routeName = "/home";
-      } else if (username.isNotEmpty &&
-          statusG.isNotEmpty &&
-          statusG != "INDIVIDUAL") {
+      if (username!.isNotEmpty && statusG == "INDIVIDUAL") {
         return routeName = '/mofresh-market';
-      } else if (contact!.isEmpty) {
-        return routeName = '/welcome';
       }
-      if (username.isEmpty && logged == 'loggedOut') {
+      if (username.isNotEmpty && statusG != "INDIVIDUAL") {
+        return routeName = "/home";
+      }
+      if (contactG.isEmpty) {
         return routeName = '/login';
       }
       return routeName;
@@ -79,7 +74,6 @@ class _MyAppState extends State<MyApp> {
     MaterialColor primayColor = MaterialColor(0xFF7CB211, color);
     print(contactG);
     print(usernameG);
-
     print(statusG);
 
     return MaterialApp(
@@ -91,7 +85,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: WaitingPage(routeNameGlobal),
       routes: {
-        "/welcome": (context) => const WelcomeScreen(),
+        "/welcomes": (context) => const WelcomeScreen(),
         "/sign-up": (context) => const SignUpStarted(),
         "/choose-company-status": (context) => const ChooseCompany(),
         "/login": (context) => const Login(),

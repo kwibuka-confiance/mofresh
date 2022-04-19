@@ -81,7 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: EdgeInsets.all(10.0),
                 child: Text(
                   "Login",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, fontFamily: "Poppins"),
                 ),
               ))
         ],

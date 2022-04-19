@@ -11,7 +11,6 @@ class WaitingPage extends StatefulWidget {
 class _WaitingPageState extends State<WaitingPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     nextPage();
   }

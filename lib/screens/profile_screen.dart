@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: MediaQuery.of(context).size.width,
           top: 0,
           child: Container(
-            padding: const EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 60),
             constraints: const BoxConstraints(minHeight: 200),
             color: Theme.of(context).primaryColorDark,
             child:
