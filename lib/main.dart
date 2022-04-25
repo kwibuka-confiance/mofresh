@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
         "/mofresh-market": (context) => const MoFreshMarketScreen(),
         "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
         "/cart-screen": (context) => const CartScreen(),
-        "/payment-sucess": (context) => const SuccessfulScreen(),
+        "/payment-sucess": (context) => const SuccessfulyScreen(),
       },
     );
   }
