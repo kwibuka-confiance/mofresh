@@ -4,6 +4,7 @@ import 'package:mofresh/screens/booking_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
+import 'package:mofresh/screens/dashboard.dart';
 import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/login_screen.dart';
 import 'package:mofresh/screens/mofresh_market_details_screen.dart';
@@ -91,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         "/choose-company-status": (context) => const ChooseCompany(),
         "/login": (context) => const Login(),
         "/home": (context) => const HomeScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
         "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
         "/booking-screen-status": (context) => const ChoosingBookingStatus(),
         "/booking-screen": (context) => const BookingScreen(),

@@ -25,7 +25,7 @@ class SuccessfulyScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 20, bottom: 10),
               child: Text(
-                'Payment Done! ',
+                'Payment Done!',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -40,7 +40,7 @@ class SuccessfulyScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.symmetric(horizontal: 50),
-                      primary: const Color.fromRGBO(104, 153, 17, 1)),
+                      primary: Theme.of(context).primaryColorDark),
                   child: const Text(
                     'Ok',
                     style: TextStyle(color: Colors.white),

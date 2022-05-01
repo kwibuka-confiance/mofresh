@@ -16,7 +16,7 @@ class UserTaskWidget extends StatelessWidget {
 
   void changeProfileStatus(BuildContext context) {
     if (id == '1') {
-      Navigator.of(context).pushNamed("dashboard");
+      Navigator.of(context).pushNamed("/dashboard");
     }
     if (id == '3') {
       showDialog(
