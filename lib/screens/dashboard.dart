@@ -32,7 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                       Container(
-                        // height: 110,
+                
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,13 +59,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ],
                               ),
                             ),
-                           
+                           // adding ingredients
+
                           ],
                         ),
                       )
                     ],
                   ),
-                )
+                ),
+
+       Container(
+         margin: const EdgeInsets.symmetric(horizontal: 20),
+         padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+         decoration: BoxDecoration(
+           color: Colors.grey[200],
+           borderRadius: BorderRadius.circular(20)),
+         child: Row(children: [
+         Column(children: [
+           const Text("Engredient Fit"),
+           Row(children: [
+             Column(children:[
+               Container(
+                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                 height: 50,width: 50,child: Image.network("https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg",fit: BoxFit.cover,)),
+               const Text("Fruits")
+             ])
+           ],)
+         ],)
+       ]),)
         ],
       )),
     );
