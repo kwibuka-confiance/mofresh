@@ -17,7 +17,7 @@ class _WaitingPageState extends State<WaitingPage> {
 
   void nextPage() {
     Future.delayed(const Duration(milliseconds: 2000), () async {
-      Navigator.of(context).pushReplacementNamed(widget.routePage);
+      Navigator.of(context).pushReplacementNamed(widget.routePage );
     });
   }
 

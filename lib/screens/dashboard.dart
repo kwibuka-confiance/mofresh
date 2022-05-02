@@ -13,6 +13,8 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late List<ExpanseData> _chartData;
   late TooltipBehavior _tooltipBehavior;
+  dynamic isModalOpen = false;
+ 
 
   @override
   void initState() {
@@ -23,6 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(isModalOpen);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Your Products"),
@@ -36,7 +39,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: const Icon(Icons.notifications)),
           IconButton(
               onPressed: () {
-              
+               
+                setState(() {   
+                  isModalOpen = !isModalOpen;
+                });
               },
               icon: const Icon(Icons.add))
         ],
@@ -44,11 +50,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            
             Container(
                 child: Column(
               children: [
-              
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.all(20),
@@ -88,7 +92,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ],
                                     ),
                                   ),
-                                 const Text("100 * 100 CM"),
+                                  const Text("100 * 100 CM"),
                                   const Text(
                                       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae "),
                                 ],
@@ -103,7 +107,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20)),
@@ -166,7 +171,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               Text("Coldbox size",
-                                  style: TextStyle(fontWeight: FontWeight.bold)),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                               Text("120cm * 120cm")
                             ],
                           ),
@@ -180,7 +186,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: const [
                                   Text(
                                     "Temperature",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   Text("100 C")
                                 ],
@@ -193,8 +200,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ]),
                 ),
                 Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     height: 300,
                     child: SfCartesianChart(
                       tooltipBehavior: _tooltipBehavior,
@@ -240,7 +247,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     '23 °C',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   )),
                             ),
                             Container(
@@ -254,53 +262,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 )
               ],
             )),
-              Align(
-                  alignment:Alignment.topRight,
-                  child: Stack(children: [
-                    Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [ BoxShadow(
-                color: const Color.fromARGB(255, 46, 46, 46).withOpacity(0.3),
-                offset: const Offset(0.0, 1.0), 
-                blurRadius: 3.0,
-              ),],
-                        borderRadius: BorderRadius.circular(10))
-                      ,width:MediaQuery.of(context).size.width *0.6,
-
-                      child: Column(
-                        children: [
-                          productTypeSelectionWidget(context),
-                          productTypeSelectionWidget(context),
-                          productTypeSelectionWidget(context),
-                          productTypeSelectionWidget(context),
-
-                        ],
-                      ),
-                          )
-                  ],),
-                ),
+            isModalOpen == true
+                ? Align(
+                    alignment: Alignment.topRight,
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(255, 46, 46, 46)
+                                      .withOpacity(0.3),
+                                  offset: const Offset(0.0, 1.0),
+                                  blurRadius: 3.0,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(10)),
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Column(
+                            children: [
+                              // https://kivu.mofresh.rw/img/1oYtgzozFKiAhngGzFTlcoQ93msPcute2mmx5kmE.jpg
+                              productTypeSelectionWidget(context,"Mofresh Box","https://kivu.mofresh.rw/box/3fDoYqoqTCY76MOOvwJPwcze0tebeksjxhmbRoYy.jpg","Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+                              productTypeSelectionWidget(context, "Mofresh Container","https://kivu.mofresh.rw/box/iZbHsi7M68MXHq1UVK35X5vEDbI1pO6QBzjlOMSs.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                              productTypeSelectionWidget(context,"Mofresh Fridge","https://kivu.mofresh.rw/box/ajKsGIS7UrxvWD8Rrzp4t9LPBpvAl3aETIGKL3IK.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                              productTypeSelectionWidget(context,"Mofresh Hub","https://kivu.mofresh.rw/img/gC5Z6xWmP9pez82f5Ua61HhRUXUqRHX5HB2AGnvN.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),
     );
   }
 
-  Container productTypeSelectionWidget(BuildContext context) {
+  Container productTypeSelectionWidget(BuildContext context,title,image,content) {
     return Container(
-              
-                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                  child: Row(children: [
-                  Container(height: 50,width: 50,child: Image.network("https://kivu.mofresh.rw/img/1oYtgzozFKiAhngGzFTlcoQ93msPcute2mmx5kmE.jpg",fit: BoxFit.cover,),),
-                  Padding(
-                    padding: const EdgeInsets.only(left:8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [const Text("Mo Fresh Grey"),
-                    SizedBox(width: MediaQuery.of(context).size.width *0.35,child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. ",style: TextStyle(fontSize: 10),))
-                    ],),
-                  )
-                ],));
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Row(
+          children: [
+            Container(
+              height: 50,
+              width: 50,
+              child: Image.network(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   Text(title),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child:  Text(
+                       content,
+                        style: const TextStyle(fontSize: 10),
+                      ))
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

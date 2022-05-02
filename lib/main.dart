@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late String routeNameGlobal = '';
+  late String routeNameGlobal = '/welcomes';
   late String usernameG = '';
   late String statusG = '';
   late String contactG = '';
@@ -53,27 +53,22 @@ class _MyAppState extends State<MyApp> {
       contactG = contact!;
     });
 
-    dashboardChoosen() {
-      var routeName = '/login';
-      if (username!.isNotEmpty && statusG == "INDIVIDUAL") {
-        return routeName = '/mofresh-market';
-      }
-      if (username.isNotEmpty && statusG != "INDIVIDUAL") {
-        return routeName = "/home";
-      }
-      if (contactG.isEmpty) {
-        return routeName = '/login';
+    routeDefined() {
+      String routeName = '/welcomes';
+      if (usernameG.isNotEmpty) {
+        return "/home";
       }
       return routeName;
     }
 
     setState(() {
-      routeNameGlobal = dashboardChoosen();
+      routeNameGlobal = routeDefined();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print(routeNameGlobal);
     MaterialColor primayColor = MaterialColor(0xFF7CB211, color);
     print(contactG);
     print(usernameG);
@@ -101,7 +96,7 @@ class _MyAppState extends State<MyApp> {
         "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
         "/cart-screen": (context) => const CartScreen(),
         "/payment-sucess": (context) => const SuccessfulyScreen(),
-        DashboardScreen.routeName:(context) => const NotificationScreen()
+        DashboardScreen.routeName: (context) => const NotificationScreen()
       },
     );
   }
