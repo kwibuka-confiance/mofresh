@@ -9,6 +9,7 @@ import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/login_screen.dart';
 import 'package:mofresh/screens/mofresh_market_details_screen.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
+import 'package:mofresh/screens/notification_screen.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/successful_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
@@ -100,6 +101,7 @@ class _MyAppState extends State<MyApp> {
         "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
         "/cart-screen": (context) => const CartScreen(),
         "/payment-sucess": (context) => const SuccessfulyScreen(),
+        DashboardScreen.routeName:(context) => const NotificationScreen()
       },
     );
   }
