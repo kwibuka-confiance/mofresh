@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/screens/buy_product_detail_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../utils/financialDatas.dart';
 
@@ -14,7 +15,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late List<ExpanseData> _chartData;
   late TooltipBehavior _tooltipBehavior;
   dynamic isModalOpen = false;
- 
 
   @override
   void initState() {
@@ -39,8 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: const Icon(Icons.notifications)),
           IconButton(
               onPressed: () {
-               
-                setState(() {   
+                setState(() {
                   isModalOpen = !isModalOpen;
                 });
               },
@@ -149,10 +148,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   height: 50,
                                   width: 50,
                                   child: Image.network(
-                                    "https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg",
+                                    "https://images.squarespace-cdn.com/content/v1/5c812e1b2727be1d59be0907/1584984891098-71YB1S4YX7OR7HIBV9K2/mixed+meat+3.PNG?format=2500w",
                                     fit: BoxFit.cover,
                                   )),
-                              const Text("Fruits")
+                              const Text("Meat")
                             ]),
                           ],
                         )
@@ -285,10 +284,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Column(
                             children: [
                               // https://kivu.mofresh.rw/img/1oYtgzozFKiAhngGzFTlcoQ93msPcute2mmx5kmE.jpg
-                              productTypeSelectionWidget(context,"Mofresh Box","https://kivu.mofresh.rw/box/3fDoYqoqTCY76MOOvwJPwcze0tebeksjxhmbRoYy.jpg","Lorem ipsum dolor sit amet consectetur adipisicing elit."),
-                              productTypeSelectionWidget(context, "Mofresh Container","https://kivu.mofresh.rw/box/iZbHsi7M68MXHq1UVK35X5vEDbI1pO6QBzjlOMSs.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
-                              productTypeSelectionWidget(context,"Mofresh Fridge","https://kivu.mofresh.rw/box/ajKsGIS7UrxvWD8Rrzp4t9LPBpvAl3aETIGKL3IK.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
-                              productTypeSelectionWidget(context,"Mofresh Hub","https://kivu.mofresh.rw/img/gC5Z6xWmP9pez82f5Ua61HhRUXUqRHX5HB2AGnvN.jpg", "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                              productTypeSelectionWidget(
+                                  context,
+                                  "1",
+                                  "Mofresh Box",
+                                  "https://kivu.mofresh.rw/box/3fDoYqoqTCY76MOOvwJPwcze0tebeksjxhmbRoYy.jpg",
+                                  "Lorem ipsum dolor sit amet consectetur adipisicing elit."),
+                              productTypeSelectionWidget(
+                                  context,
+                                  '2',
+                                  "Mofresh Container",
+                                  "https://kivu.mofresh.rw/box/iZbHsi7M68MXHq1UVK35X5vEDbI1pO6QBzjlOMSs.jpg",
+                                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                              productTypeSelectionWidget(
+                                  context,
+                                  '3',
+                                  "Mofresh Fridge",
+                                  "https://kivu.mofresh.rw/box/ajKsGIS7UrxvWD8Rrzp4t9LPBpvAl3aETIGKL3IK.jpg",
+                                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
+                              productTypeSelectionWidget(
+                                  context,
+                                  '4',
+                                  "Mofresh Hub",
+                                  "https://kivu.mofresh.rw/img/gC5Z6xWmP9pez82f5Ua61HhRUXUqRHX5HB2AGnvN.jpg",
+                                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. "),
                             ],
                           ),
                         )
@@ -302,35 +321,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Container productTypeSelectionWidget(BuildContext context,title,image,content) {
-    return Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        child: Row(
-          children: [
-            Container(
-              height: 50,
-              width: 50,
-              child: Image.network(
-                image,
-                fit: BoxFit.cover,
+  Widget productTypeSelectionWidget(
+      BuildContext context,id, title, image, content) {
+    return InkWell(
+      onTap: () {
+          Navigator.of(context).pushNamed(BuyProductDetailScreen.routeName,arguments: {
+                "id": id,
+                "tag": 'Fruit',
+                "mainPhoto": image.toString().substring(0,23),
+                "districtName":"Gasabo",
+                "provinceName": "Kigali",
+                "sectorName": "Kinyinya",
+                "storageName": title,
+                "storageOverview": content
+          }); 
+   
+      },
+      child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Row(
+            children: [
+              Container(
+                height: 50,
+                width: 50,
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   Text(title),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      child:  Text(
-                       content,
-                        style: const TextStyle(fontSize: 10),
-                      ))
-                ],
-              ),
-            )
-          ],
-        ));
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: Text(
+                          content,
+                          style: const TextStyle(fontSize: 10),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
 import 'package:mofresh/screens/booking_screen.dart';
+import 'package:mofresh/screens/buy_product_detail_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
@@ -96,7 +97,8 @@ class _MyAppState extends State<MyApp> {
         "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
         "/cart-screen": (context) => const CartScreen(),
         "/payment-sucess": (context) => const SuccessfulyScreen(),
-        DashboardScreen.routeName: (context) => const NotificationScreen()
+        DashboardScreen.routeName: (context) => const NotificationScreen(),
+        BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen()
       },
     );
   }

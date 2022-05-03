@@ -28,7 +28,10 @@ class _CartScreenState extends State<CartScreen> {
             backgroundColor: Theme.of(context).primaryColorDark,
             actions: [
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("/cart-screen");
+                  },
+                  icon: const Icon(Icons.shopping_cart))
             ],
             title: const Text("Cart")),
         body: Stack(
@@ -56,11 +59,11 @@ class _CartScreenState extends State<CartScreen> {
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
+                                   horizontal: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Padding(
+                                children:  [
+                                 const Padding(
                                     padding: EdgeInsets.only(bottom: 8.0),
                                     child: Text(
                                       "Mo Fresh Grey",
@@ -69,8 +72,10 @@ class _CartScreenState extends State<CartScreen> {
                                           fontSize: 16),
                                     ),
                                   ),
-                                  Text("100 * 100 CM"),
-                                  Text("Medecines and Pharmaceuticals"),
+                                 const Text("100 * 100 CM"),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width * 0.5,
+                                    child: const Text("Medecines and Pharmaceuticals",style: TextStyle(fontSize: 11),)),
                                 ],
                               ),
                             ),

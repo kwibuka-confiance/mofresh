@@ -10,15 +10,15 @@ import 'package:mofresh/models/coldBox.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:mofresh/widgets/booking_rent.dart';
 
-class ColdBoxDescriptionScreen extends StatefulWidget {
-  const ColdBoxDescriptionScreen({Key? key}) : super(key: key);
+class BuyProductDetailScreen extends StatefulWidget {
+  const BuyProductDetailScreen({Key? key}) : super(key: key);
+  static const routeName = 'buy-product';
 
   @override
-  State<ColdBoxDescriptionScreen> createState() =>
-      _ColdBoxDescriptionScreenState();
+  State<BuyProductDetailScreen> createState() => _BuyProductDetailScreenState();
 }
 
-class _ColdBoxDescriptionScreenState extends State<ColdBoxDescriptionScreen> {
+class _BuyProductDetailScreenState extends State<BuyProductDetailScreen> {
   bool isExpanded = true;
   int finalActIdFinal = 0;
 
