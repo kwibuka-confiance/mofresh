@@ -7,10 +7,13 @@ import 'package:mofresh/screens/choose-company-screen.dart';
 import 'package:mofresh/screens/coldbox_description_screen.dart';
 import 'package:mofresh/screens/dashboard.dart';
 import 'package:mofresh/screens/home_screen.dart';
+import 'package:mofresh/screens/home_screenl.dart';
 import 'package:mofresh/screens/login_screen.dart';
 import 'package:mofresh/screens/mofresh_market_details_screen.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
+import 'package:mofresh/screens/moreProductsDetails.dart';
 import 'package:mofresh/screens/notification_screen.dart';
+import 'package:mofresh/screens/productDetails.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/successful_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
@@ -103,7 +106,8 @@ class _MyAppState extends State<MyApp> {
           "/cart-screen": (context) => const CartScreen(),
           "/payment-sucess": (context) => const SuccessfulyScreen(),
           DashboardScreen.routeName: (context) => const NotificationScreen(),
-          BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen()
+          BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen(),
+          HomeScreenL.routeName :(context) => const MoreProductScreen()
         },
       ),
     );
