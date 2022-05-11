@@ -72,7 +72,7 @@ class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return ShimmerSpinner();
+      return const ShimmerSpinner();
     } else {
       return RefreshIndicator(
         onRefresh: () => refreshBoxes(context),

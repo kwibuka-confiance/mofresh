@@ -17,6 +17,9 @@ import 'package:mofresh/screens/welcome_screen.dart';
 import 'package:mofresh/ui_widgets/waiting-page.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import './provider/products.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -75,31 +78,34 @@ class _MyAppState extends State<MyApp> {
     print(usernameG);
     print(statusG);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MoFresh',
-      theme: ThemeData(
-        primarySwatch: primayColor,
-        fontFamily: 'Poppins',
+    return ChangeNotifierProvider(
+      create: (ctx)=>Products(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'MoFresh',
+        theme: ThemeData(
+          primarySwatch: primayColor,
+          fontFamily: 'Poppins',
+        ),
+        home: WaitingPage(routeNameGlobal),
+        routes: {
+          "/welcomes": (context) => const WelcomeScreen(),
+          "/sign-up": (context) => const SignUpStarted(),
+          "/choose-company-status": (context) => const ChooseCompany(),
+          "/login": (context) => const Login(),
+          "/home": (context) => const HomeScreen(),
+          '/dashboard': (context) => const DashboardScreen(),
+          "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
+          "/booking-screen-status": (context) => const ChoosingBookingStatus(),
+          "/booking-screen": (context) => const BookingScreen(),
+          "/mofresh-market": (context) => const MoFreshMarketScreen(),
+          "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
+          "/cart-screen": (context) => const CartScreen(),
+          "/payment-sucess": (context) => const SuccessfulyScreen(),
+          DashboardScreen.routeName: (context) => const NotificationScreen(),
+          BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen()
+        },
       ),
-      home: WaitingPage(routeNameGlobal),
-      routes: {
-        "/welcomes": (context) => const WelcomeScreen(),
-        "/sign-up": (context) => const SignUpStarted(),
-        "/choose-company-status": (context) => const ChooseCompany(),
-        "/login": (context) => const Login(),
-        "/home": (context) => const HomeScreen(),
-        '/dashboard': (context) => const DashboardScreen(),
-        "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
-        "/booking-screen-status": (context) => const ChoosingBookingStatus(),
-        "/booking-screen": (context) => const BookingScreen(),
-        "/mofresh-market": (context) => const MoFreshMarketScreen(),
-        "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
-        "/cart-screen": (context) => const CartScreen(),
-        "/payment-sucess": (context) => const SuccessfulyScreen(),
-        DashboardScreen.routeName: (context) => const NotificationScreen(),
-        BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen()
-      },
     );
   }
 }

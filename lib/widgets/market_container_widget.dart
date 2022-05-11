@@ -34,7 +34,7 @@ class ColdBoxContainerMarket extends StatelessWidget {
                 offset: const Offset(0, 2),
               )
             ]),
-        height: 150,
+        height: 170,
         child: Row(
           children: [
             ClipRRect(
@@ -64,7 +64,7 @@ class ColdBoxContainerMarket extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                  title,
                     style: const TextStyle(
                         fontSize: 17, fontWeight: FontWeight.bold),
                   ),
@@ -97,7 +97,8 @@ class ColdBoxContainerMarket extends StatelessWidget {
                   ),
                   Text(
                     description.substring(0, 100),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 12, ),
+
                   ),
                   Align(
                       alignment: Alignment.centerRight,

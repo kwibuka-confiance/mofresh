@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/changeContainerToColdBox.dart';
 import 'package:mofresh/containers/mofresh_coldbox.dart';
+import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/utils/URL.dart';
 import 'package:mofresh/widgets/searchbar_filter.dart';
 import 'package:mofresh/widgets/sections.dart';
 import 'package:mofresh/models/coldBox.dart';
 import 'package:http/http.dart' as http;
 import 'package:mofresh/widgets/shimmer_loader.dart';
+import 'package:provider/provider.dart';
 
 class MoFreshMarketScreen extends StatefulWidget {
   const MoFreshMarketScreen({Key? key}) : super(key: key);
@@ -139,7 +141,10 @@ class _MoFreshMarketScreenState extends State<MoFreshMarketScreen> {
 
   @override
   Widget build(BuildContext context) {
-    console(_coldBoxes);
+    final productData = Provider.of<Products>(context);
+    final _coldBoxesData = productData.items;
+    console(_coldBoxesData);
+    // console(_coldBoxes);
     return Scaffold(
       appBar: AppBar(
           foregroundColor: Colors.white,
