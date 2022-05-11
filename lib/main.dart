@@ -14,6 +14,7 @@ import 'package:mofresh/screens/mofresh_market_screen.dart';
 import 'package:mofresh/screens/moreProductsDetails.dart';
 import 'package:mofresh/screens/notification_screen.dart';
 import 'package:mofresh/screens/productDetails.dart';
+import 'package:mofresh/screens/product_details_screenl.dart';
 import 'package:mofresh/screens/signup_screen.dart';
 import 'package:mofresh/screens/successful_screen.dart';
 import 'package:mofresh/screens/welcome_screen.dart';
@@ -107,7 +108,8 @@ class _MyAppState extends State<MyApp> {
           "/payment-sucess": (context) => const SuccessfulyScreen(),
           DashboardScreen.routeName: (context) => const NotificationScreen(),
           BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen(),
-          HomeScreenL.routeName :(context) => const MoreProductScreen()
+          HomeScreenL.routeName :(context) => const MoreProductScreen(),
+          ProductDetailsScreenL.routeName : (context)=> const ProductDetailsScreenL()
         },
       ),
     );

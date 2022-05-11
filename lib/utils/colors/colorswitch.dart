@@ -9,6 +9,6 @@ Map<int, Color> color = {
   500: const Color.fromRGBO(4, 141, 42, .6),
   600: const Color.fromRGBO(4, 141, 42, .7),
   700: const Color.fromRGBO(4, 141, 42, .8),
-  800: const Color.fromRGBO(4, 141, 42, 9),
+  800: const Color.fromRGBO(4, 141, 42, .9),
   900: const Color.fromRGBO(4, 141, 42, 1),
 };
