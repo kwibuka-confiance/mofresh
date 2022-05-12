@@ -52,7 +52,12 @@ class _CartScreenState extends State<CartScreen> {
                         context,
                         cart.items.values.toList()[index].title,
                         cart.items.values.toList()[index].price.toString(),
-                        cart.items.values.toList()[index].imageUrl),
+                        cart.items.values.toList()[index].imageUrl,
+                        cart.items.values.toList()[index].quantity
+                        
+                        )
+                        
+                        ,
                   )),
                 )
               ],
@@ -226,7 +231,7 @@ class _CartScreenState extends State<CartScreen> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Text(
-                                  'RWF ${totalAmount.toString()}',
+                                  'RWF ${cart.totalAmount.toString()}',
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -289,7 +294,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Container cartItemWidget(
-      BuildContext context, String title, priceAmount, imgUrl) {
+      BuildContext context, String title, priceAmount, imgUrl,quantity) {
     print(imgUrl);
     return Container(
       width: double.infinity,
@@ -357,7 +362,7 @@ class _CartScreenState extends State<CartScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              numberOfItems.toString(),
+                              quantity.toString(),
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
