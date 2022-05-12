@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
 
+  static const routeName = '/cart-screen';
+
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -29,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
             actions: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed("/cart-screen");
+                    Navigator.of(context).pushNamed(CartScreen.routeName);
                   },
                   icon: const Icon(Icons.shopping_cart))
             ],
@@ -58,12 +60,12 @@ class _CartScreenState extends State<CartScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                   horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children:  [
-                                 const Padding(
+                                children: [
+                                  const Padding(
                                     padding: EdgeInsets.only(bottom: 8.0),
                                     child: Text(
                                       "Mo Fresh Grey",
@@ -72,10 +74,14 @@ class _CartScreenState extends State<CartScreen> {
                                           fontSize: 16),
                                     ),
                                   ),
-                                 const Text("100 * 100 CM"),
+                                  const Text("100 * 100 CM"),
                                   Container(
-                                    width: MediaQuery.of(context).size.width * 0.5,
-                                    child: const Text("Medecines and Pharmaceuticals",style: TextStyle(fontSize: 11),)),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: const Text(
+                                        "Medecines and Pharmaceuticals",
+                                        style: TextStyle(fontSize: 11),
+                                      )),
                                 ],
                               ),
                             ),

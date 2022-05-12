@@ -8,6 +8,7 @@ class MoFreshProduct {
   String districtName;
   String sectorName;
   String storageOverview;
+  List moreProducts;
   Color color = const Color.fromARGB(255, 2, 114, 30);
 
   MoFreshProduct(
@@ -18,6 +19,7 @@ class MoFreshProduct {
       required this.sectorName,
       required this.storageName,
       required this.storageOverview,
-      required this.color});
-
+      required this.color,
+      required this.moreProducts
+      });
 }

@@ -1,8 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
+import 'package:mofresh/provider/cart.dart';
+import 'package:mofresh/provider/products.dart';
+import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/product_details_screenl.dart';
+import 'package:mofresh/utils/URL.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart';
 
 class MoreProductScreen extends StatefulWidget {
   const MoreProductScreen({Key? key}) : super(key: key);
@@ -14,6 +19,10 @@ class MoreProductScreen extends StatefulWidget {
 class _MoreProductScreenState extends State<MoreProductScreen> {
   @override
   Widget build(BuildContext context) {
+    final plateItemsProvider = Provider.of<Products>(context);
+    final plateItems = plateItemsProvider.plateItems;
+    // final cart = Provider.of<Cart>(context, listen: false);
+    // print(cart.itemsCount.toString());
     return Scaffold(
       appBar: AppBar(
           foregroundColor: Theme.of(context).primaryColorDark,
@@ -28,9 +37,25 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
               onPressed: () {},
               icon: const Icon(Icons.notifications),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.shopping_cart),
+            Consumer<Cart>(
+              builder: (_, cartData, chi) => Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CartScreen.routeName);
+                  },
+                  icon: Badge(
+                      badgeContent: Text(
+                        cartData.itemsCount.toString(),
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 1, 156, 40),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      badgeColor: Colors.orange,
+                      child: chi),
+                ),
+              ),
+              child: const Icon(Icons.shopping_cart),
             )
           ]),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -73,8 +98,18 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
                   ],
                 ),
               ),
-              const MoreProductWidget(),
-              const MoreProductWidget(),
+              ListView.builder(
+                primary: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: plateItems.length,
+                itemBuilder: (context, index) => MoreProductWidget(
+                    plateItems[index].id,
+                    plateItems[index].storageName,
+                    plateItems[index].platePicture,
+                    plateItems[index].maxTemperature,
+                    plateItems[index].plateDescription),
+              )
             ],
           ),
         )
@@ -84,16 +119,28 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
 }
 
 class MoreProductWidget extends StatelessWidget {
-  const MoreProductWidget({
+  String id;
+  String plateName;
+  String imageUrl;
+  String maxTemperature;
+  String description;
+  MoreProductWidget(
+    this.id,
+    this.plateName,
+    this.imageUrl,
+    this.maxTemperature,
+    this.description, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
+
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetailsScreenL.routeName);
-      
+        Navigator.of(context)
+            .pushNamed(ProductDetailsScreenL.routeName, arguments: id);
       },
       child: Container(
         margin: const EdgeInsets.only(top: 0, left: 20, right: 20, bottom: 20),
@@ -124,17 +171,17 @@ class MoreProductWidget extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "Plate 1",
-                              style: TextStyle(
+                              plateName,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
                             ),
-                            const Text(
-                              "Good Autoresponder",
-                              style: TextStyle(
+                            Text(
+                              maxTemperature,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w100,
                               ),
                             )
@@ -143,10 +190,9 @@ class MoreProductWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                        "In publishing and graphic design, Lorem ipsum is a real In publishing and graphic design, Lorem ipsum is a real"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(description.substring(0, 130).toString()),
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -157,7 +203,7 @@ class MoreProductWidget extends StatelessWidget {
                       width: double.infinity,
                       height: 200,
                       child: Image.network(
-                        "https://kivu.mofresh.rw/img/mS3zTr8t1xNqjXLfanoqAh9mGVFu9otwWmorhVnn.jpg",
+                        Mofresh.imageUrlAPI + imageUrl,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -216,28 +262,33 @@ class MoreProductWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColorDark,
-                              borderRadius: BorderRadius.circular(5)),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 20),
-                          child: Row(
-                            children: const [
-                              Padding(
-                                padding: EdgeInsets.only(right: 4.0),
-                                child: Icon(
-                                  Icons.local_grocery_store_sharp,
-                                  color: Colors.white,
+                        GestureDetector(
+                          onTap: () {
+                            cart.addItem(id, 2100, plateName);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColorDark,
+                                borderRadius: BorderRadius.circular(5)),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 20),
+                            child: Row(
+                              children: const [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: Icon(
+                                    Icons.local_grocery_store_sharp,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Add to Cart",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              )
-                            ],
+                                Text(
+                                  "Add to Cart",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
+import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/screens/booking_screen.dart';
 import 'package:mofresh/screens/buy_product_detail_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
@@ -82,8 +83,12 @@ class _MyAppState extends State<MyApp> {
     print(usernameG);
     print(statusG);
 
-    return ChangeNotifierProvider(
-      create: (ctx)=>Products(),
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(
+      create: (ctx)=>Products(),),
+      ChangeNotifierProvider(
+      create: (ctx)=>Cart(),)
+    ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'MoFresh',
@@ -104,7 +109,7 @@ class _MyAppState extends State<MyApp> {
           "/booking-screen": (context) => const BookingScreen(),
           "/mofresh-market": (context) => const MoFreshMarketScreen(),
           "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
-          "/cart-screen": (context) => const CartScreen(),
+          CartScreen.routeName: (context) => const CartScreen(),
           "/payment-sucess": (context) => const SuccessfulyScreen(),
           DashboardScreen.routeName: (context) => const NotificationScreen(),
           BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen(),
