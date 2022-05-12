@@ -60,8 +60,8 @@ class Products with ChangeNotifier {
         storageName: "Plate 1",
         plateDescription:
             "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum",
-        buyPrice: "50,000 RWF",
-        rentPrice: "5000 RWF",
+        buyPrice: "50000",
+        rentPrice: "5000",
         maxTemperature: "-35",
         platePicture: "img/dX11CLnQ7VCdKRo8iM3FA63rpfcMNaCSIWd0RGrj.png",
         plateType: "Blue",
@@ -71,8 +71,8 @@ class Products with ChangeNotifier {
         storageName: "Plate 2",
         plateDescription:
             "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum",
-        buyPrice: "50,000 RWF",
-        rentPrice: "5000 RWF",
+        buyPrice: "50000",
+        rentPrice: "5000",
         maxTemperature: "-45",
         platePicture: "img/8QbBvezD3ByHrDsBqaWPgKspXDKmWOIDdMWbvn9t.png",
         plateType: "Blue",
@@ -82,8 +82,8 @@ class Products with ChangeNotifier {
         storageName: "Plate 3",
         plateDescription:
             "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum",
-        buyPrice: "50,000 RWF",
-        rentPrice: "5000 RWF",
+        buyPrice: "50000",
+        rentPrice: "5000",
         maxTemperature: "-55",
         platePicture: "img/5CX5lpBayfDZzvkkLxYMYgyjf79dPc8zkJSjwlIi.png",
         plateType: "Blue",

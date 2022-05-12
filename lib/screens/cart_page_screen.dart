@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/provider/cart.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
@@ -41,108 +44,16 @@ class _CartScreenState extends State<CartScreen> {
             Column(
               children: [
                 Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 120,
-                        height: 110,
-                        child: Image.network(
-                          "https://kivu.mofresh.rw/img/1oYtgzozFKiAhngGzFTlcoQ93msPcute2mmx5kmE.jpg",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(
-                        height: 110,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(bottom: 8.0),
-                                    child: Text(
-                                      "Mo Fresh Grey",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
-                                    ),
-                                  ),
-                                  const Text("100 * 100 CM"),
-                                  Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: const Text(
-                                        "Medecines and Pharmaceuticals",
-                                        style: TextStyle(fontSize: 11),
-                                      )),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              if (numberOfItems <= 1) {
-                                                return;
-                                              }
-                                              numberOfItems = numberOfItems - 1;
-                                              totalAmount = totalAmount - price;
-                                            });
-                                          },
-                                          child: const Icon(
-                                            Icons.remove,
-                                          )),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          numberOfItems.toString(),
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              numberOfItems = numberOfItems + 1;
-                                              totalAmount = totalAmount + price;
-                                            });
-                                          },
-                                          child: const Icon(
-                                            Icons.add,
-                                          ))
-                                    ],
-                                  ),
-                                  Text(
-                                    "RWF 200,000",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color:
-                                            Theme.of(context).primaryColorDark),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                  height: 300,
+                  child: Expanded(
+                      child: ListView.builder(
+                    itemCount: cart.items.length,
+                    itemBuilder: (context, index) => cartItemWidget(
+                        context,
+                        cart.items.values.toList()[index].title,
+                        cart.items.values.toList()[index].price.toString(),
+                        cart.items.values.toList()[index].imageUrl),
+                  )),
                 )
               ],
             ),
@@ -375,5 +286,108 @@ class _CartScreenState extends State<CartScreen> {
                       ))
           ],
         ));
+  }
+
+  Container cartItemWidget(
+      BuildContext context, String title, priceAmount, imgUrl) {
+    print(imgUrl);
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          Container(
+            width: 120,
+            height: 110,
+            child: Image.network(
+             imgUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            height: 110,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                      const Text("100 * 100 CM"),
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: const Text(
+                            "Medecines and Pharmaceuticals",
+                            style: TextStyle(fontSize: 11),
+                          )),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (numberOfItems <= 1) {
+                                    return;
+                                  }
+                                  numberOfItems = numberOfItems - 1;
+                                  totalAmount = totalAmount - price;
+                                });
+                              },
+                              child: const Icon(
+                                Icons.remove,
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              numberOfItems.toString(),
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          InkWell(
+                              onTap: () {
+                                setState(() {
+                                  numberOfItems = numberOfItems + 1;
+                                  totalAmount = totalAmount + price;
+                                });
+                              },
+                              child: const Icon(
+                                Icons.add,
+                              ))
+                        ],
+                      ),
+                      Text(
+                        priceAmount,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColorDark),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

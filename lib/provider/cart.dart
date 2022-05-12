@@ -4,12 +4,14 @@ class CartItem {
   final String id;
   final String title;
   final int quantity;
+  final imageUrl;
   final double price;
 
   CartItem(
       {required this.id,
       required this.title,
       required this.quantity,
+      required this.imageUrl,
       required this.price});
 }
 
@@ -17,15 +19,17 @@ class Cart with ChangeNotifier {
   final Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get items {
-    return {...items};
+    return {..._items};
   }
 
   int get itemsCount {
     // ignore: unnecessary_null_comparison
-    return  _items.length;
+    return _items.length;
   }
 
-  void addItem(String prodId, double price, String title) {
+  // vo
+
+  void addItem(String prodId, double price, String title,imgUrl) {
     if (_items.containsKey(prodId)) {
       //
       _items.update(
@@ -34,6 +38,7 @@ class Cart with ChangeNotifier {
               id: prodId,
               title: title,
               quantity: exixtingCartItem.quantity + 1,
+              imageUrl: imgUrl,
               price: price));
     } else {
       _items.putIfAbsent(
@@ -42,6 +47,7 @@ class Cart with ChangeNotifier {
               id: DateTime.now().toString(),
               title: title,
               quantity: 1,
+              imageUrl: imgUrl,
               price: price));
     }
     notifyListeners();

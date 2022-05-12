@@ -108,6 +108,7 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
                     plateItems[index].storageName,
                     plateItems[index].platePicture,
                     plateItems[index].maxTemperature,
+                    plateItems[index].buyPrice,
                     plateItems[index].plateDescription),
               )
             ],
@@ -123,12 +124,14 @@ class MoreProductWidget extends StatelessWidget {
   String plateName;
   String imageUrl;
   String maxTemperature;
+  String price;
   String description;
   MoreProductWidget(
     this.id,
     this.plateName,
     this.imageUrl,
     this.maxTemperature,
+    this.price,
     this.description, {
     Key? key,
   }) : super(key: key);
@@ -136,6 +139,8 @@ class MoreProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+
+    print(price);
 
     return GestureDetector(
       onTap: () {
@@ -264,7 +269,7 @@ class MoreProductWidget extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            cart.addItem(id, 2100, plateName);
+                            cart.addItem(id, double.parse(price), plateName, Mofresh.imageUrlAPI + imageUrl);
                           },
                           child: Container(
                             decoration: BoxDecoration(
