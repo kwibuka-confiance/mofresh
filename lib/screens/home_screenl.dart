@@ -19,19 +19,15 @@ class _HomeScreenLState extends State<HomeScreenL> {
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
     final _mofreshProducts = productData.items;
+    
 
     return Scaffold(
-      // appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          // Header
-          Container(
-            padding: const EdgeInsets.only(top: 40, right: 10, left: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
+      appBar: AppBar(
+        toolbarHeight: 80,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title:  
+        Row(   children: const [
                     Text(
                       "Hello, ",
                       style: TextStyle(fontSize: 25),
@@ -43,9 +39,8 @@ class _HomeScreenLState extends State<HomeScreenL> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Padding(
+        actions: [
+          Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: CircleAvatar(
                         maxRadius: 20,
@@ -67,11 +62,11 @@ class _HomeScreenLState extends State<HomeScreenL> {
                           color: Theme.of(context).primaryColorDark,
                           size: 30,
                         ))
-                  ],
-                )
-              ],
-            ),
-          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          
           // Hubs
           Container(
             margin: const EdgeInsets.all(15),

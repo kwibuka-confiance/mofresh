@@ -1,6 +1,10 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
+import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
+import 'package:mofresh/screens/cart_page_screen.dart';
+import 'package:mofresh/utils/URL.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsScreenL extends StatefulWidget {
@@ -14,8 +18,10 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
   @override
   Widget build(BuildContext context) {
     final plateId = ModalRoute.of(context)!.settings.arguments as String;
-    final loadedProduct = Provider.of<Products>(context,listen: false).findById(plateId);
-    
+    final loadedProduct =
+        Provider.of<Products>(context, listen: false).findById(plateId);
+    final cartItems = Provider.of<Cart>(context);
+    final cart = cartItems.itemsCount;
     return Scaffold(
       body: Stack(
         children: [
@@ -36,21 +42,33 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Hero(
-                  tag: '1',
+                  tag: loadedProduct.id,
                   child: Container(
                       child: Image.network(
-                    "https://kivu.mofresh.rw/img/mS3zTr8t1xNqjXLfanoqAh9mGVFu9otwWmorhVnn.jpg",
+                    Mofresh.imageUrlAPI + loadedProduct.platePicture,
                     fit: BoxFit.cover,
                   )),
                 )),
                 actions: [
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.notifications),
+                    icon: const Icon(
+                      Icons.notifications,
+                      color: Color.fromARGB(255, 189, 113, 0),
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.shopping_cart),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                      },
+                      icon: Badge(
+                        badgeContent: Text(cartItems.itemsCount.toString()),
+                        child: const Icon(Icons.shopping_cart,
+                            color: Color.fromARGB(255, 189, 113, 0)),
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -93,26 +111,29 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                       children: [
                         Container(
                           child: Column(children: [
-                            Icon(Icons.ten_mp_rounded),
-                            Text("Temperature",
+                            const Icon(Icons.cloud_done),
+                            const Text("Temperature",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13))
+                                    fontWeight: FontWeight.bold, fontSize: 13)),
+                            Text(loadedProduct.maxTemperature)
                           ]),
                         ),
                         Container(
                           child: Column(children: [
-                            Icon(Icons.ten_mp_rounded),
-                            Text("Temperature",
+                            const Icon(Icons.merge_type),
+                            const Text("Type",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13))
+                                    fontWeight: FontWeight.bold, fontSize: 13)),
+                            Text(loadedProduct.plateType)
                           ]),
                         ),
                         Container(
                           child: Column(children: [
-                            Icon(Icons.ten_mp_rounded),
-                            Text("Temperature",
+                            const Icon(Icons.code_off),
+                            const Text("Storage Code",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13))
+                                    fontWeight: FontWeight.bold, fontSize: 13)),
+                            Text(loadedProduct.storageCode)
                           ]),
                         ),
                       ],
@@ -129,8 +150,8 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                         vertical: 10, horizontal: 20),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Padding(
+                        children: [
+                          const Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
                               "Description",
@@ -138,10 +159,7 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                           ),
-                          Text(
-                              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,"),
-                          Text(
-                              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,"),
+                          Text(loadedProduct.plateDescription),
                         ]),
                   ),
                 ]),
@@ -155,12 +173,38 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
               child: Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(4, 141, 42, 1),
-                    borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(25)),
                 margin:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                child: Row(children: [Text("Buy"), Text("Rent")]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          cartItems.addItem(
+                              loadedProduct.id,
+                              double.parse(loadedProduct.buyPrice),
+                              loadedProduct.storageName,
+                               Mofresh.imageUrlAPI+loadedProduct.platePicture);
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: const Text(
+                              "Buy",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )),
+                      ),
+                      const Text(
+                        "Rent",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      )
+                    ]),
               ))
         ],
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/provider/cart.dart';
+import 'package:mofresh/screens/dashboard.dart';
+import 'package:mofresh/screens/notification_screen.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -34,9 +36,9 @@ class _CartScreenState extends State<CartScreen> {
             actions: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(CartScreen.routeName);
+                    Navigator.of(context).pushNamed(DashboardScreen.routeName);
                   },
-                  icon: const Icon(Icons.shopping_cart))
+                  icon: const Icon(Icons.notifications))
             ],
             title: const Text("Cart")),
         body: Stack(
@@ -47,6 +49,8 @@ class _CartScreenState extends State<CartScreen> {
                   height: 300,
                   child: Expanded(
                       child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                     itemCount: cart.items.length,
                     itemBuilder: (context, index) => cartItemWidget(
                         context,
@@ -88,7 +92,7 @@ class _CartScreenState extends State<CartScreen> {
                                     style: TextStyle(fontSize: 20),
                                   ),
                                   Text(
-                                    'RWF ${totalAmount.toString()}',
+                                    'RWF ${cart.totalAmount.toString()}',
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
