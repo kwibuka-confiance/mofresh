@@ -1,8 +1,12 @@
 import 'dart:ui';
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
+import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
+import 'package:mofresh/screens/cart_page_screen.dart';
+import 'package:mofresh/screens/dashboard.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenL extends StatefulWidget {
@@ -19,54 +23,62 @@ class _HomeScreenLState extends State<HomeScreenL> {
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
     final _mofreshProducts = productData.items;
-    
+    final cart = Provider.of<Cart>(context);
 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title:  
-        Row(   children: const [
-                    Text(
-                      "Hello, ",
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    Text(
-                      "Confiance",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+        title: Row(
+          children: const [
+            Text(
+              "Hello, ",
+              style: TextStyle(fontSize: 25),
+            ),
+            Text(
+              "Confiance",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
         actions: [
           Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: CircleAvatar(
-                        maxRadius: 20,
-                        backgroundColor: Theme.of(context).primaryColorDark,
-                        foregroundColor: Colors.white,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.notifications,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color: Theme.of(context).primaryColorDark,
-                          size: 30,
-                        ))
+            padding: const EdgeInsets.only(right: 10.0),
+            child: CircleAvatar(
+              maxRadius: 20,
+              backgroundColor: Theme.of(context).primaryColorDark,
+              foregroundColor: Colors.white,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(DashboardScreen.routeName);
+                },
+                icon: const Icon(
+                  Icons.notifications,
+                  size: 18,
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+                icon: Badge(
+                  badgeContent: Text(cart.itemsCount.toString()),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Theme.of(context).primaryColorDark,
+                    size: 30,
+                  ),
+                )),
+          )
         ],
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          
           // Hubs
           Container(
             margin: const EdgeInsets.all(15),
@@ -109,7 +121,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                             ),
                             ElevatedButton(
                                 onPressed: () {},
-                                style: ButtonStyle(),
+                                style: const ButtonStyle(),
                                 child: const Text("Book Places",
                                     style: TextStyle(
                                         color: Colors.white,

@@ -4,6 +4,7 @@ import 'package:mofresh/models/tag.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
+import 'package:mofresh/ui_widgets/rentPlate.dart';
 import 'package:mofresh/utils/URL.dart';
 import 'package:provider/provider.dart';
 
@@ -187,11 +188,11 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                               loadedProduct.id,
                               double.parse(loadedProduct.buyPrice),
                               loadedProduct.storageName,
-                               Mofresh.imageUrlAPI+loadedProduct.platePicture);
+                              Mofresh.imageUrlAPI + loadedProduct.platePicture);
                         },
                         child: Container(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
+                                vertical: 10, horizontal: 50),
                             child: const Text(
                               "Buy",
                               style: TextStyle(
@@ -199,10 +200,27 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                                   color: Colors.white),
                             )),
                       ),
-                      const Text(
-                        "Rent",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
+                            ),
+                              context: context,
+                              builder: (_) {
+                                return const PlateRent();
+                              });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 50),
+                          child: const Text(
+                            "Rent",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
                       )
                     ]),
               ))
