@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
+import 'package:mofresh/screens/box_product_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/dashboard.dart';
+import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenL extends StatefulWidget {
@@ -46,7 +48,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: CircleAvatar(
-              maxRadius: 20,
+              maxRadius: 16,
               backgroundColor: Theme.of(context).primaryColorDark,
               foregroundColor: Colors.white,
               child: IconButton(
@@ -67,7 +69,8 @@ class _HomeScreenLState extends State<HomeScreenL> {
                   Navigator.of(context).pushNamed(CartScreen.routeName);
                 },
                 icon: Badge(
-                  badgeContent: Text(cart.itemsCount.toString()),
+                  badgeColor: MoFreshColor.accentColor,
+                  badgeContent: Text(cart.itemsCount.toString(),style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   child: Icon(
                     Icons.shopping_cart,
                     color: Theme.of(context).primaryColorDark,
@@ -75,7 +78,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                   ),
                 )),
           )
-        ],
+        ], 
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -198,7 +201,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(HomeScreenL.routeName);
+                      Navigator.of(context).pushNamed(BoxProductScreen.routeName,arguments: _mofreshProducts[index].id);
                     },
                     child: Container(
                         padding: const EdgeInsets.symmetric(

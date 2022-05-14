@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/screens/booking_screen.dart';
+import 'package:mofresh/screens/box_product_screen.dart';
 import 'package:mofresh/screens/buy_product_detail_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/choose-company-screen.dart';
@@ -114,7 +115,8 @@ class _MyAppState extends State<MyApp> {
           DashboardScreen.routeName: (context) => const NotificationScreen(),
           BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen(),
           HomeScreenL.routeName :(context) => const MoreProductScreen(),
-          ProductDetailsScreenL.routeName : (context)=> const ProductDetailsScreenL()
+          ProductDetailsScreenL.routeName : (context)=> const ProductDetailsScreenL(),
+          BoxProductScreen.routeName :(context) => const BoxProductScreen()
         },
       ),
     );

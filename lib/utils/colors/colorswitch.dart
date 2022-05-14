@@ -12,3 +12,8 @@ Map<int, Color> color = {
   800: const Color.fromRGBO(4, 141, 42, .9),
   900: const Color.fromRGBO(4, 141, 42, 1),
 };
+
+class MoFreshColor {
+  static const Color accentColor = Color.fromRGBO(255, 173, 52, 1);
+  static const Color primarColor =  Color.fromRGBO(4, 141, 42, 1);
+}
