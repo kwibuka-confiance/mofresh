@@ -3,6 +3,7 @@ import 'package:mofresh/containers/changeContainerToColdBox.dart';
 import 'package:mofresh/containers/coldboxes_container.dart';
 import 'package:mofresh/screens/home_screenl.dart';
 import 'package:mofresh/screens/mofresh_market_screen.dart';
+import 'package:mofresh/screens/moreProductsDetails.dart';
 import 'package:mofresh/screens/original_market.dart';
 import 'package:mofresh/screens/profile_screen.dart';
 import 'package:mofresh/widgets/app_bar.dart';
@@ -32,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Widget> _page = [
       const HomeScreenL(),
       // const storageHubScreen(),
-      const MoFreshMarketScreen(),
+      // const MoFreshMarketScreen(),
+      const MoreProductScreen(),
       const MarketScreen(),
       const ProfileScreen()
     ];
@@ -55,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
         fixedColor: const Color.fromARGB(255, 0, 150, 20),
         unselectedItemColor: Colors.black54,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Hubs'),
-          BottomNavigationBarItem(icon: Icon(Icons.storage), label: 'Storage'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.storage), label: 'Plates'),
           BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Market'),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'Profile'),

@@ -2,24 +2,30 @@ import 'package:flutter/material.dart';
 
 class MoFreshProduct {
   String id;
-  String storageName;
-  String mainPhoto;
-  String provinceName;
-  String districtName;
-  String sectorName;
-  String storageOverview;
-  List moreProducts;
-  Color color = const Color.fromARGB(255, 2, 114, 30);
+  String boxCategory;
+  String boxMainPhoto;
+  String description;
+  String rentPrice;
+  String buyPrice;
+
+  
 
   MoFreshProduct(
       {required this.id,
-      required this.districtName,
-      required this.mainPhoto,
-      required this.provinceName,
-      required this.sectorName,
-      required this.storageName,
-      required this.storageOverview,
-      required this.color,
-      required this.moreProducts
+      required this.boxCategory,
+      required this.boxMainPhoto,
+      required this.description,
+      required this.rentPrice,
+      required this.buyPrice,
       });
+}
+
+class BoxCategory {
+  String id;
+  String name;
+  String imageUrl;
+  String description;
+  Color color = const Color.fromARGB(255, 2, 114, 30);
+
+  BoxCategory({required this.id, required this.imageUrl, required this.name, required this.description, required this.color});
 }

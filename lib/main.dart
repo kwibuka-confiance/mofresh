@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     print(routeNameGlobal);
-    MaterialColor primayColor = MaterialColor(0xFF7CB211, color);
+    MaterialColor primayColor = MaterialColor(0xFF00802b, color);
     print(contactG);
     print(usernameG);
     print(statusG);

@@ -5,6 +5,7 @@ import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/product_details_screenl.dart';
+import 'package:mofresh/ui_widgets/productPlate.dart';
 import 'package:mofresh/utils/URL.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
@@ -248,28 +249,36 @@ class MoreProductWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(5)),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 3, horizontal: 20),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(right: 4.0),
-                                  child: Icon(
-                                    Icons.read_more,
-                                    color: Colors.white,
+                            child: InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+                                    context: context, builder: (_)=> ProductRent(plateName, price) );
+                              },
+                              child: Row(
+                                children: const [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 4.0),
+                                    child: Icon(
+                                      Icons.read_more,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Rent",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )
-                              ],
+                                  Text(
+                                    "Rent",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            cart.addItem(id, double.parse(price), plateName, Mofresh.imageUrlAPI + imageUrl);
+                            cart.addItem(id, double.parse(price), plateName,
+                                Mofresh.imageUrlAPI + imageUrl);
                           },
                           child: Container(
                             decoration: BoxDecoration(

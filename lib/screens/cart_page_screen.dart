@@ -45,24 +45,28 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             Column(
               children: [
-                Container(
-                  height: 300,
-                  child: Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                    itemCount: cart.items.length,
-                    itemBuilder: (context, index) => cartItemWidget(
-                        context,
-                        cart.items.values.toList()[index].title,
-                        cart.items.values.toList()[index].price.toString(),
-                        cart.items.values.toList()[index].imageUrl,
-                        cart.items.values.toList()[index].quantity
-                        
-                        )
-                        
-                        ,
-                  )),
+                SingleChildScrollView(
+                  child: Container(
+                    
+                    height: 300,
+                    child: Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          primary: true,
+                      itemCount: cart.items.length,
+                      itemBuilder: (context, index) => cartItemWidget(
+                          context,
+                          cart.items.values.toList()[index].title,
+                          cart.items.values.toList()[index].price.toString(),
+                          cart.items.values.toList()[index].imageUrl,
+                          cart.items.values.toList()[index].quantity
+                          
+                          )
+                          
+                          ,
+                    )),
+                  ),
                 )
               ],
             ),

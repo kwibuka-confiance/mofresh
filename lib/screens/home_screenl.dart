@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 class HomeScreenL extends StatefulWidget {
   const HomeScreenL({Key? key}) : super(key: key);
 
-  static const routeName = '/more-product';
+  static const routeName = '/get-plate';
 
   @override
   State<HomeScreenL> createState() => _HomeScreenLState();
@@ -22,7 +22,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
-    final _mofreshProducts = productData.items;
+    final _mofreshProducts = productData.categoryItems;
     final cart = Provider.of<Cart>(context);
 
     return Scaffold(
@@ -34,11 +34,11 @@ class _HomeScreenLState extends State<HomeScreenL> {
           children: const [
             Text(
               "Hello, ",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 25,color: Colors.black),
             ),
             Text(
               "Confiance",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.black),
             ),
           ],
         ),
@@ -182,7 +182,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Text(
-                "Containers",
+                "MoFresh Products",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               GridView.builder(
@@ -206,7 +206,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(
-                                    _mofreshProducts[index].mainPhoto),
+                                    _mofreshProducts[index].imageUrl),
                                 fit: BoxFit.cover),
                             color: const Color.fromARGB(255, 2, 77, 18),
                             borderRadius: BorderRadius.circular(10)),
@@ -241,7 +241,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
                                                 _mofreshProducts[index]
-                                                    .storageName,
+                                                    .name,
                                                 style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white),

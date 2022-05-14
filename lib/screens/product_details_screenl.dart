@@ -4,7 +4,7 @@ import 'package:mofresh/models/tag.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
-import 'package:mofresh/ui_widgets/rentPlate.dart';
+import 'package:mofresh/ui_widgets/productPlate.dart';
 import 'package:mofresh/utils/URL.dart';
 import 'package:provider/provider.dart';
 
@@ -30,17 +30,18 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
             slivers: [
               SliverAppBar(
                 elevation: 0,
-                // foregroundColor: Theme.of(context).primaryColorDark,
+           
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                 leading: IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon:  Icon(Icons.arrow_back,color: Theme.of(context).primaryColor,),
                   // color: Theme.of(context).primaryColorDark,
                 ),
                 expandedHeight: 300,
-                pinned: true,
+                centerTitle: true ,
+                pinned: true,title: Text(loadedProduct.storageName,style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor),),
                 flexibleSpace: FlexibleSpaceBar(
                     background: Hero(
                   tag: loadedProduct.id,
@@ -203,12 +204,14 @@ class _ProductDetailsScreenLState extends State<ProductDetailsScreenL> {
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
+                            // isScrollControlled: true,
                             shape: const RoundedRectangleBorder(
+                              
                               borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
                             ),
                               context: context,
                               builder: (_) {
-                                return const PlateRent();
+                                return  ProductRent(loadedProduct.storageName,loadedProduct.rentPrice);
                               });
                         },
                         child: Container(
