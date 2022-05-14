@@ -54,6 +54,8 @@ class Products with ChangeNotifier {
       imageUrl:
           "https://preview.free3d.com/img/2016/11/2188257044614612070/lt9jcwgw-900.jpg",
       name: "Fridge",
+        buyPrice: "20000",
+      rentPrice: "1200",
       description:
           "n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       color: const Color.fromARGB(255, 0, 86, 216),
@@ -63,6 +65,8 @@ class Products with ChangeNotifier {
       imageUrl: Mofresh.imageUrlAPI +
           "img/gC5Z6xWmP9pez82f5Ua61HhRUXUqRHX5HB2AGnvN.jpg",
       name: "Container",
+      buyPrice: "20000",
+      rentPrice: "1200",
       description:
           "n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       color: const Color.fromARGB(255, 0, 88, 15),
@@ -70,6 +74,8 @@ class Products with ChangeNotifier {
     BoxCategory(
       id: "3",
       imageUrl: "https://c4d.cz/img/gallery/product/Birel_final.jpg",
+        buyPrice: "20000",
+      rentPrice: "1200",
       name: "Box",
       description:
           "n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
@@ -79,6 +85,8 @@ class Products with ChangeNotifier {
       id: "4",
       imageUrl: Mofresh.imageUrlAPI +
           "img/73xtsZIh7o5lHE5JoVlm8o0kZt2gV7zcM3tC6OOC.jpg",
+            buyPrice: "20000",
+      rentPrice: "1200",
       name: "Premium Box",
       description:
           "n publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",

@@ -5,6 +5,7 @@ import 'package:mofresh/models/tag.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
+import 'package:mofresh/ui_widgets/productPlate.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +25,30 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
     final cartItems = Provider.of<Cart>(context);
 
     final boxData = productData.findProductBoxById(productId);
+
+    void buyBoxHandler (){
+       cartItems.addItem(
+                              boxData.id,
+                              double.parse(boxData.buyPrice),
+                              boxData.name,
+                              boxData.imageUrl);
+    }
+
+    void rentBoxHandler(){
+               showModalBottomSheet(
+                            // isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
+                            ),
+                              context: context,
+                              builder: (_) {
+                                return  ProductRent(boxData.name,boxData.rentPrice);
+                              });              
+    }
+
     return Scaffold(
-      // appBar: AppBar(title: const Text("Fridge"), actions: [
-      //   IconButton(onPressed: () {}, icon: const Icon(Icons.notifications)),
-      //   IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
-      // ]),
+      
       body: Stack(
         children: [
           CustomScrollView(
@@ -182,64 +202,41 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
               )
             ],
           ),
-          // Positioned(
-          //     bottom: 0,
-          //     right: 0,
-          //     left: 0,
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //           color: const Color.fromRGBO(4, 141, 42, 1),
-          //           borderRadius: BorderRadius.circular(25)),
-          //       margin:
-          //           const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          //       padding:
-          //           const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-          //       child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //           children: [
-          //             GestureDetector(
-          //               onTap: () {
-          //                 cartItems.addItem(
-          //                     loadedProduct.id,
-          //                     double.parse(loadedProduct.buyPrice),
-          //                     loadedProduct.storageName,
-          //                     Mofresh.imageUrlAPI + loadedProduct.platePicture);
-          //               },
-          //               child: Container(
-          //                   padding: const EdgeInsets.symmetric(
-          //                       vertical: 10, horizontal: 50),
-          //                   child: const Text(
-          //                     "Buy",
-          //                     style: TextStyle(
-          //                         fontWeight: FontWeight.bold,
-          //                         color: Colors.white),
-          //                   )),
-          //             ),
-          //             GestureDetector(
-          //               onTap: () {
-          //                 showModalBottomSheet(
-          //     bottom: 0,
-          //     right: 0,
-          //                     borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
-          //                   ),
-          //                     context: context,
-          //                     builder: (_) {
-          //                       return  ProductRent(loadedProduct.storageName,loadedProduct.rentPrice);
-          //                     });
-          //               },
-          //               child: Container(
-          //                 padding: const EdgeInsets.symmetric(
-          //                     vertical: 10, horizontal: 50),
-          //                 child: const Text(
-          //                   "Rent",
-          //                   style: TextStyle(
-          //                       fontWeight: FontWeight.bold,
-          //                       color: Colors.white),
-          //                 ),
-          //               ),
-          //             )
-          //           ]),
-          //     ))
+          Positioned(
+            bottom: 0,
+           right: 0,
+          left: 0,
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+              decoration: BoxDecoration(
+              color: MoFreshColor.primarColor,
+                borderRadius: BorderRadius.circular(25)),
+              width:    MediaQuery.of(context).size.width,
+              child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                  
+                    color: MoFreshColor.primarColor,
+                    child: TextButton(onPressed: ()=>rentBoxHandler(), child: const Text("Rent",style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(
+                     shadowColor: MoFreshColor.primarColor,
+                     enabledMouseCursor: MouseCursor.defer,
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    primary: Colors.transparent,),)),
+                    Container(
+                    color: MoFreshColor.primarColor,
+                    child: TextButton(onPressed: ()=> buyBoxHandler(), child: const Text("Buy",style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(
+                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                   
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                    elevation: 0,
+                    primary: Colors.transparent,),)),
+                ],
+              ),
+            )),
+          
         ],
       ),
     );

@@ -8,16 +8,14 @@ class MoFreshProduct {
   String rentPrice;
   String buyPrice;
 
-  
-
-  MoFreshProduct(
-      {required this.id,
-      required this.boxCategory,
-      required this.boxMainPhoto,
-      required this.description,
-      required this.rentPrice,
-      required this.buyPrice,
-      });
+  MoFreshProduct({
+    required this.id,
+    required this.boxCategory,
+    required this.boxMainPhoto,
+    required this.description,
+    required this.rentPrice,
+    required this.buyPrice,
+  });
 }
 
 class BoxCategory {
@@ -25,7 +23,16 @@ class BoxCategory {
   String name;
   String imageUrl;
   String description;
+  String buyPrice;
+  String rentPrice;
   Color color = const Color.fromARGB(255, 2, 114, 30);
 
-  BoxCategory({required this.id, required this.imageUrl, required this.name, required this.description, required this.color});
+  BoxCategory(
+      {required this.id,
+      required this.imageUrl,
+      required this.name,
+      required this.description,
+      required this.buyPrice,
+      required this.rentPrice,
+      required this.color});
 }
