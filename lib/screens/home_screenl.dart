@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
@@ -11,6 +10,7 @@ import 'package:mofresh/screens/dashboard.dart';
 import 'package:mofresh/screens/home_screen.dart';
 import 'package:mofresh/screens/storageHubScreen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
+import 'package:mofresh/widgets/shimmer_loader.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenL extends StatefulWidget {
@@ -23,13 +23,20 @@ class HomeScreenL extends StatefulWidget {
 }
 
 class _HomeScreenLState extends State<HomeScreenL> {
-  @override
   bool _isInit = true;
+  bool _isLoading = false;
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<Products>(context).getMoFreshProducts();
+    setState(() {
+      _isLoading = true;
+    });
+      Provider.of<Products>(context).getMoFreshProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -185,7 +192,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                                                 ),
                                               ),
                                             ),
-                                            // const Padding(
+                                            // const Padding( 
                                             //   padding:  EdgeInsets.only(left:4.0),
                                             //   child:  Text("Fruits",style: TextStyle(color: Colors.white),),
                                             // )
@@ -204,16 +211,20 @@ class _HomeScreenLState extends State<HomeScreenL> {
               // todo BOXES Containers
             ]),
           ),
+
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 15),
             width: double.infinity,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text(
-                "MoFresh Products",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              GridView.builder(
+             const  Padding(
+                padding:  EdgeInsets.symmetric(vertical:10.0),
+                child:  Text(
+                  "MoFresh Products",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ), 
+             _isLoading ? const LoaderProducts(): GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -23,7 +23,7 @@ class Products with ChangeNotifier {
             imageUrl: Mofresh.imageUrlAPI+prod['boxMainPhoto'],
             name: prod['boxCategory'],
             description: prod['description'],
-            buyPrice: prod['boxPrice'],
+            buyPrice: prod['buyPrice'],
             rentPrice: prod['boxPrice'],
             color: const Color.fromARGB(255, 2, 92, 92)));
       }

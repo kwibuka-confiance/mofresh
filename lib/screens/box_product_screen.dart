@@ -153,21 +153,21 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
                                     fontWeight: FontWeight.bold, fontSize: 13))
                           ]),
                         ),
-                        Container(
+                        SizedBox(
                           child: Column(children: [
                             const Icon(Icons.merge_type,color: MoFreshColor.accentColor,),
                             const Text("Rent Price",
                                 ),
-                            Text("200 RWF",style: TextStyle(
+                            Text("${boxData.rentPrice} RWF",style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 13))
                           ]),
                         ),
-                        Container(
+                        SizedBox(
                           child: Column(children: [
                             const Icon(Icons.code_off,color: MoFreshColor.accentColor,),
                             const Text("Buy Price",
                                 ),
-                            Text("2000 RWF",style: TextStyle(
+                            Text("${boxData.buyPrice} RWF",style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 13))
                           ]),
                         ),

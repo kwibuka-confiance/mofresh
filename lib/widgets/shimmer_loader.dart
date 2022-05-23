@@ -204,3 +204,50 @@ class BoxesDataShimmer extends StatelessWidget {
     );
   }
 }
+
+class LoaderProducts extends StatelessWidget {
+  const LoaderProducts({Key? key}) : super(key: key);
+
+  Widget shimmerEffect(BuildContext context) {
+    return SizedBox(
+      child: Stack(children: [SizedBox(
+                height: 200,
+                width: MediaQuery.of(context).size.width * 0.42,
+                child: Shimmer.fromColors(
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Container()),
+                    baseColor: Colors.grey[200]!,
+                    highlightColor: Colors.grey[300]!),
+              ),
+              Positioned(
+                bottom: 0,
+                child: SizedBox(
+                  height: 70,
+                  width: MediaQuery.of(context).size.width * 0.42,
+                  child: Shimmer.fromColors(
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Container()),
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[400]!),
+                ),
+              )
+              ,]),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+      shimmerEffect(context),
+      shimmerEffect(context)
+    ],);
+  }
+}
