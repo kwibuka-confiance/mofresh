@@ -13,7 +13,7 @@ import 'package:mofresh/widgets/sections.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
+  
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> _page = [
       const HomeScreenL(),
-      // const storageHubScreen(),
+      // const StorageHubScreen(),
       // const MoFreshMarketScreen(),
       const MoreProductScreen(),
       const MarketScreen(),
@@ -63,38 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: 'Profile'),
         ],
-      ),
-    );
-  }
-}
-
-class storageHubScreen extends StatelessWidget {
-  const storageHubScreen({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          foregroundColor: Colors.white,
-          backgroundColor: Theme.of(context).primaryColorDark,
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
-          ],
-          title: const Text("MoFresh")),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SectionSelectableWidget(),
-              const SearchBarWidget(),
-              ColdBoxesContainer()
-            ],
-          ),
-        ),
       ),
     );
   }

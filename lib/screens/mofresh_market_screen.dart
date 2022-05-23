@@ -142,8 +142,7 @@ class _MoFreshMarketScreenState extends State<MoFreshMarketScreen> {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
-    final _coldBoxesData = productData.items;
-    console(_coldBoxesData);
+    // s
     // console(_coldBoxes);
     return Scaffold(
       appBar: AppBar(

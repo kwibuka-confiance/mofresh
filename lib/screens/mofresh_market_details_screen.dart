@@ -128,11 +128,11 @@ class _MarketBoxDetailsScreenState extends State<MarketBoxDetailsScreen> {
             ]))
           ],
         ),
-        Positioned(
+        const Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: BookingOrRent("Buy", "Rent", "order")),
+            child: BookingOrRent()),
       ]),
     );
   }

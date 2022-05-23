@@ -8,6 +8,8 @@ import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/box_product_screen.dart';
 import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/dashboard.dart';
+import 'package:mofresh/screens/home_screen.dart';
+import 'package:mofresh/screens/storageHubScreen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,18 @@ class HomeScreenL extends StatefulWidget {
 
 class _HomeScreenLState extends State<HomeScreenL> {
   @override
+  bool _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<Products>(context).getMoFreshProducts();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
     final _mofreshProducts = productData.categoryItems;
@@ -35,12 +49,15 @@ class _HomeScreenLState extends State<HomeScreenL> {
         title: Row(
           children: const [
             Text(
-              "Hello, ",
-              style: TextStyle(fontSize: 25,color: Colors.black),
+              "Hello,",
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
             Text(
               "Confiance",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.black),
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
           ],
         ),
@@ -70,7 +87,11 @@ class _HomeScreenLState extends State<HomeScreenL> {
                 },
                 icon: Badge(
                   badgeColor: MoFreshColor.accentColor,
-                  badgeContent: Text(cart.itemsCount.toString(),style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                  badgeContent: Text(
+                    cart.itemsCount.toString(),
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
                   child: Icon(
                     Icons.shopping_cart,
                     color: Theme.of(context).primaryColorDark,
@@ -78,7 +99,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                   ),
                 )),
           )
-        ], 
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -88,6 +109,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.4,
             decoration: BoxDecoration(
+                color: MoFreshColor.primarColor,
                 borderRadius: BorderRadius.circular(15),
                 image: const DecorationImage(
                     image: NetworkImage(
@@ -123,9 +145,12 @@ class _HomeScreenLState extends State<HomeScreenL> {
                                   color: Colors.white),
                             ),
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(StorageHubScreen.routeName);
+                                },
                                 style: const ButtonStyle(),
-                                child: const Text("Book Places",
+                                child: const Text("Get one near you",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)))
@@ -201,7 +226,9 @@ class _HomeScreenLState extends State<HomeScreenL> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(BoxProductScreen.routeName,arguments: _mofreshProducts[index].id);
+                      Navigator.of(context).pushNamed(
+                          BoxProductScreen.routeName,
+                          arguments: _mofreshProducts[index].id);
                     },
                     child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -243,8 +270,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                _mofreshProducts[index]
-                                                    .name,
+                                                _mofreshProducts[index].name,
                                                 style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white),

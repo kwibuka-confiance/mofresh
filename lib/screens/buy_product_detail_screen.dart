@@ -192,12 +192,11 @@ class _BuyProductDetailScreenState extends State<BuyProductDetailScreen> {
               ])),
             ],
           ),
-          Positioned(
-            // width: MediaQuery.of(context).size.width,
+        const  Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            child: BookingOrRent("Book Now", "price", 'booking'),
+            child: BookingOrRent(),
           )
         ],
       ),

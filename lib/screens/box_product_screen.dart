@@ -100,7 +100,6 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
                       },
                       icon: Badge(
                         badgeColor: MoFreshColor.primarColor,
-                        
                         badgeContent: Text(cartItems.itemsCount.toString(),style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                         child: const Icon(Icons.shopping_cart,
                             color: MoFreshColor.accentColor),

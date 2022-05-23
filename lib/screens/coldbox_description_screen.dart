@@ -192,12 +192,12 @@ class _ColdBoxDescriptionScreenState extends State<ColdBoxDescriptionScreen> {
               ])),
             ],
           ),
-          Positioned(
+         const Positioned(
             // width: MediaQuery.of(context).size.width,
             left: 0,
             right: 0,
             bottom: 0,
-            child: BookingOrRent("Book Now", "price", 'booking'),
+            child: BookingOrRent(),
           )
         ],
       ),
