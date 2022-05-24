@@ -18,8 +18,8 @@ class _HubRentSpaceState extends State<HubRentSpace> {
 
   @override
   Widget build(BuildContext context) {
-    final start = dateTimeRange.start;
-    final end = dateTimeRange.end;
+    final _start = dateTimeRange.start;
+    final _end = dateTimeRange.end;
     final differenceDays = dateTimeRange.duration;
 
     print(DateTime.now().month);
@@ -75,11 +75,9 @@ class _HubRentSpaceState extends State<HubRentSpace> {
                   onPressed: () {
                     pickDateRange();
                   },
-                  child: Text("${start.year}/${start.month}/${start.day}")),
+                  child: Text("${_start.year}/${_start.month}/${_start.day}")),
             ),
-            // ElevatedButton(
-            //     onPressed: () {},
-            //     child: Text("${end.year}/${end.month}/${end.day}"))
+            
           ],
         ),
         Column(
