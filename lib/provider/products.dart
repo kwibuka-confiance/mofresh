@@ -20,7 +20,7 @@ class Products with ChangeNotifier {
       for (var prod in extractedData) {
         loadedProducts.add(BoxCategory(
             id: prod['id'].toString(),
-            imageUrl: Mofresh.imageUrlAPI+prod['boxMainPhoto'],
+            imageUrl: Mofresh.imageUrlAPI + prod['boxMainPhoto'],
             name: prod['boxCategory'],
             description: prod['description'],
             buyPrice: prod['buyPrice'],
@@ -34,41 +34,68 @@ class Products with ChangeNotifier {
     }
   }
 
-  final List<Plate> _plateItems = [
-    Plate(
-        id: "1",
-        storageName: "Plate 1",
-        plateDescription:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-        buyPrice: "50000",
-        rentPrice: "5000",
-        maxTemperature: "-35",
-        platePicture: "img/dX11CLnQ7VCdKRo8iM3FA63rpfcMNaCSIWd0RGrj.png",
-        plateType: "Blue",
-        storageCode: "CS-620FBDDCC5F6E"),
-    Plate(
-        id: "2",
-        storageName: "Plate 2",
-        plateDescription:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-        buyPrice: "55000",
-        rentPrice: "5500",
-        maxTemperature: "-45",
-        platePicture: "img/8QbBvezD3ByHrDsBqaWPgKspXDKmWOIDdMWbvn9t.png",
-        plateType: "Blue",
-        storageCode: "CS-620FBDDCC5F6E"),
-    Plate(
-        id: "3",
-        storageName: "Plate 3",
-        plateDescription:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-        buyPrice: "70000",
-        rentPrice: "6400",
-        maxTemperature: "-55",
-        platePicture: "img/5CX5lpBayfDZzvkkLxYMYgyjf79dPc8zkJSjwlIi.png",
-        plateType: "Blue",
-        storageCode: "CS-620FBDDCC5F6E")
+  List<Plate> _plateItems = [
+    // Plate(
+    //     id: "1",
+    //     storageName: "Plate 1",
+    //     plateDescription:
+    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
+    //     buyPrice: "50000",
+    //     rentPrice: "5000",
+    //     maxTemperature: "-35",
+    //     platePicture: "img/dX11CLnQ7VCdKRo8iM3FA63rpfcMNaCSIWd0RGrj.png",
+    //     plateType: "Blue",
+    //     storageCode: "CS-620FBDDCC5F6E"),
+    // Plate(
+    //     id: "2",
+    //     storageName: "Plate 2",
+    //     plateDescription:
+    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
+    //     buyPrice: "55000",
+    //     rentPrice: "5500",
+    //     maxTemperature: "-45",
+    //     platePicture: "img/8QbBvezD3ByHrDsBqaWPgKspXDKmWOIDdMWbvn9t.png",
+    //     plateType: "Blue",
+    //     storageCode: "CS-620FBDDCC5F6E"),
+    // Plate(
+    //     id: "3",
+    //     storageName: "Plate 3",
+    //     plateDescription:
+    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
+    //     buyPrice: "70000",
+    //     rentPrice: "6400",
+    //     maxTemperature: "-55",
+    //     platePicture: "img/5CX5lpBayfDZzvkkLxYMYgyjf79dPc8zkJSjwlIi.png",
+    //     plateType: "Blue",
+    //     storageCode: "CS-620FBDDCC5F6E")
   ];
+
+  ///Fetching Plates
+
+  Future<void> getPlates() async {
+    final url = '${Mofresh.url2}getPlates';
+    try {
+      final result = await http.get(Uri.parse(url));
+      final List<Plate> loadedPlates = [];
+      final extractedData = json.decode(result.body);
+      for (var plateData in extractedData) {
+        loadedPlates.add(Plate(
+            id: plateData['id'].toString(),
+            storageName: plateData['storageName'],
+            plateDescription: plateData['plate_description'],
+            buyPrice: plateData['buy_price'],
+            rentPrice: plateData['rent_price'],
+            maxTemperature: plateData['max_temperature'],
+            platePicture: plateData['platePic'],
+            plateType: plateData['plate_type'],
+            storageCode: plateData['storageCode']));
+      }
+      _plateItems = loadedPlates;
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
 
   // Managing Items
 

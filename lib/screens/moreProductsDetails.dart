@@ -7,6 +7,7 @@ import 'package:mofresh/screens/cart_page_screen.dart';
 import 'package:mofresh/screens/product_details_screenl.dart';
 import 'package:mofresh/ui_widgets/productPlate.dart';
 import 'package:mofresh/utils/URL.dart';
+import 'package:mofresh/widgets/shimmer_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
 
@@ -18,10 +19,30 @@ class MoreProductScreen extends StatefulWidget {
 }
 
 class _MoreProductScreenState extends State<MoreProductScreen> {
+  bool _isInit = true;
+  bool _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).getPlates().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final plateItemsProvider = Provider.of<Products>(context);
     final plateItems = plateItemsProvider.plateItems;
+    print(plateItems);
     // final cart = Provider.of<Cart>(context, listen: false);
     // print(cart.itemsCount.toString());
     return Scaffold(
@@ -99,19 +120,21 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
                   ],
                 ),
               ),
-              ListView.builder(
-                primary: true,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: plateItems.length,
-                itemBuilder: (context, index) => MoreProductWidget(
-                    plateItems[index].id,
-                    plateItems[index].storageName,
-                    plateItems[index].platePicture,
-                    plateItems[index].maxTemperature,
-                    plateItems[index].buyPrice,
-                    plateItems[index].plateDescription),
-              )
+              _isLoading
+                  ? const LoaderProducts()
+                  : ListView.builder(
+                      primary: true,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: plateItems.length,
+                      itemBuilder: (context, index) => MoreProductWidget(
+                          plateItems[index].id,
+                          plateItems[index].storageName,
+                          plateItems[index].platePicture,
+                          plateItems[index].maxTemperature,
+                          plateItems[index].buyPrice,
+                          plateItems[index].plateDescription),
+                    )
             ],
           ),
         )
@@ -252,8 +275,12 @@ class MoreProductWidget extends StatelessWidget {
                             child: InkWell(
                               onTap: () {
                                 showModalBottomSheet(
-                                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
-                                    context: context, builder: (_)=> ProductRent(plateName, price) );
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(25))),
+                                    context: context,
+                                    builder: (_) =>
+                                        ProductRent(plateName, price));
                               },
                               child: Row(
                                 children: const [
