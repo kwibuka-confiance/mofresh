@@ -23,32 +23,26 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
     final productData = Provider.of<Products>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final cartItems = Provider.of<Cart>(context);
-
     final boxData = productData.findProductBoxById(productId);
-
     void buyBoxHandler (){
        cartItems.addItem(
-                              boxData.id,
-                              double.parse(boxData.buyPrice),
-                              boxData.name,
-                              boxData.imageUrl);
+         boxData.id,
+          double.parse(boxData.buyPrice),
+         boxData.name,
+          boxData.imageUrl);
     }
 
     void rentBoxHandler(){
                showModalBottomSheet(
-                            // isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
+                            shape: const RoundedRectangleBorder(                             
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(25),)
                             ),
-                              context: context,
-                              builder: (_) {
-                                return  ProductRent(boxData.name,boxData.rentPrice);
-                              });              
+                  context: context,
+                  builder: (_) {
+                  return  ProductRent(boxData.name,boxData.rentPrice);
+                   });              
     }
-
     return Scaffold(
-      
       body: Stack(
         children: [
           CustomScrollView(
@@ -147,8 +141,8 @@ class _BoxProductScreenState extends State<BoxProductScreen> {
                       children: [
                         Container(
                           child: Column(children: const [
-                            const Icon(Icons.cloud_done,color: MoFreshColor.accentColor,),
-                            const Text("Size",),
+                             Icon(Icons.cloud_done,color: MoFreshColor.accentColor,),
+                             Text("Size",),
                             Text("100 CM cube",style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 13))
                           ]),
