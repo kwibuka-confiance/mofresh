@@ -24,14 +24,15 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Total",
                   style: TextStyle(fontSize: 20),
                 ),
                 Text(
-                  'RWF 2300 000',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  'RWF ${widget.clientCode}',
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

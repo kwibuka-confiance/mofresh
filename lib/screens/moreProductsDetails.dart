@@ -120,21 +120,19 @@ class _MoreProductScreenState extends State<MoreProductScreen> {
                   ],
                 ),
               ),
-              _isLoading
-                  ? const LoaderProducts()
-                  : ListView.builder(
-                      primary: true,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: plateItems.length,
-                      itemBuilder: (context, index) => MoreProductWidget(
-                          plateItems[index].id,
-                          plateItems[index].storageName,
-                          plateItems[index].platePicture,
-                          plateItems[index].maxTemperature,
-                          plateItems[index].buyPrice,
-                          plateItems[index].plateDescription),
-                    )
+              ListView.builder(
+                primary: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: plateItems.length,
+                itemBuilder: (context, index) => MoreProductWidget(
+                    plateItems[index].id,
+                    plateItems[index].storageName,
+                    plateItems[index].platePicture,
+                    plateItems[index].maxTemperature,
+                    plateItems[index].buyPrice,
+                    plateItems[index].plateDescription),
+              )
             ],
           ),
         )

@@ -13,13 +13,10 @@ import 'package:mofresh/screens/storageHubScreen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:mofresh/widgets/shimmer_loader.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenL extends StatefulWidget {
   const HomeScreenL({Key? key}) : super(key: key);
-
   static const routeName = '/get-plate';
-
   @override
   State<HomeScreenL> createState() => _HomeScreenLState();
 }
