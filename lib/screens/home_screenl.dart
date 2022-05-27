@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mofresh/models/tag.dart';
+import 'package:mofresh/provider/auth.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/screens/box_product_screen.dart';
@@ -12,6 +13,7 @@ import 'package:mofresh/screens/storageHubScreen.dart';
 import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:mofresh/widgets/shimmer_loader.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenL extends StatefulWidget {
   const HomeScreenL({Key? key}) : super(key: key);
@@ -29,14 +31,15 @@ class _HomeScreenLState extends State<HomeScreenL> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-    setState(() {
-      _isLoading = true;
-    });
+      setState(() {
+        _isLoading = true;
+      });
       Provider.of<Products>(context).getMoFreshProducts().then((_) {
         setState(() {
           _isLoading = false;
         });
       });
+      Provider.of<Auth>(context).getClientCode();
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -47,6 +50,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
     final productData = Provider.of<Products>(context);
     final _mofreshProducts = productData.categoryItems;
     final cart = Provider.of<Cart>(context);
+    final clientCode = Provider.of<Auth>(context).clientCode;
 
     return Scaffold(
       appBar: AppBar(
@@ -192,7 +196,7 @@ class _HomeScreenLState extends State<HomeScreenL> {
                                                 ),
                                               ),
                                             ),
-                                            // const Padding( 
+                                            // const Padding(
                                             //   padding:  EdgeInsets.only(left:4.0),
                                             //   child:  Text("Fruits",style: TextStyle(color: Colors.white),),
                                             // )
@@ -217,123 +221,132 @@ class _HomeScreenLState extends State<HomeScreenL> {
             width: double.infinity,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-             const  Padding(
-                padding:  EdgeInsets.symmetric(vertical:10.0),
-                child:  Text(
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
                   "MoFresh Products",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-              ), 
-             _isLoading ? const LoaderProducts(): GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.9,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
-                ),
-                itemCount: _mofreshProducts.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          BoxProductScreen.routeName,
-                          arguments: _mofreshProducts[index].id);
-                    },
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 3, horizontal: 3),
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    _mofreshProducts[index].imageUrl),
-                                fit: BoxFit.cover),
-                            color: const Color.fromARGB(255, 2, 77, 18),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 15, sigmaY: 20),
-                                    child: Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 0.5,
-                                                style: BorderStyle.solid,
-                                                color: Colors.white
-                                                    .withOpacity(0.3)),
-                                            color: _mofreshProducts[index]
-                                                .color
-                                                .withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                _mofreshProducts[index].name,
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  width: 90,
-                                                  child: const Text(
-                                                    'Available for Buy and Rents',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 13),
+              ),
+              _isLoading
+                  ? const LoaderProducts()
+                  : GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.9,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                      ),
+                      itemCount: _mofreshProducts.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                                BoxProductScreen.routeName,
+                                arguments: _mofreshProducts[index].id);
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 3),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          _mofreshProducts[index].imageUrl),
+                                      fit: BoxFit.cover),
+                                  color: const Color.fromARGB(255, 2, 77, 18),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 15, sigmaY: 20),
+                                          child: Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 0.5,
+                                                      style: BorderStyle.solid,
+                                                      color: Colors.white
+                                                          .withOpacity(0.3)),
+                                                  color: _mofreshProducts[index]
+                                                      .color
+                                                      .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      _mofreshProducts[index]
+                                                          .name,
+                                                      style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white),
+                                                    ),
                                                   ),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    IconButton(
-                                                        onPressed: () {},
-                                                        icon: const Icon(
-                                                            Icons
-                                                                .add_shopping_cart,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    226,
-                                                                    136,
-                                                                    0)))
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        width: 90,
+                                                        child: const Text(
+                                                          'Available for Buy and Rents',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13),
+                                                        ),
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          IconButton(
+                                                              onPressed: () {},
+                                                              icon: const Icon(
+                                                                  Icons
+                                                                      .add_shopping_cart,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          226,
+                                                                          136,
+                                                                          0)))
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )),
-                  );
-                },
-              )
+                                ],
+                              )),
+                        );
+                      },
+                    )
             ]),
           )
         ]),

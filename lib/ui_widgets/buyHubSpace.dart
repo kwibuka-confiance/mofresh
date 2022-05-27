@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/provider/UI.dart';
+import 'package:mofresh/provider/auth.dart';
+import 'package:mofresh/provider/products.dart';
 import 'package:mofresh/ui_widgets/paymentHub.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +16,21 @@ class HubRentSpace extends StatefulWidget {
 }
 
 class _HubRentSpaceState extends State<HubRentSpace> {
+  bool _isInit = true;
+  bool _isLoading = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Auth>(context).getClientCode();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   DateTimeRange dateTimeRange = DateTimeRange(
       start: DateTime(
           DateTime.now().year, DateTime.now().month, DateTime.now().day),
@@ -23,119 +40,124 @@ class _HubRentSpaceState extends State<HubRentSpace> {
   @override
   Widget build(BuildContext context) {
     final stepper = Provider.of<UI>(context);
+    final clientCode = Provider.of<Auth>(context).clientCode;
 
     final _start = dateTimeRange.start;
     final _end = dateTimeRange.end;
     final differenceDays = dateTimeRange.duration;
 
-    print(DateTime.now().month);
-    return stepper.step == 1 ? const PaymentWidget() : Container(
-      height: MediaQuery.of(context).size.height * 0.37,
-      margin: const EdgeInsets.all(20),
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Get Space",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(widget.productTitle)
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "${double.parse(widget.rentPrice)} RWF",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    const Text("Rent Payment"),
-                  ],
-                )
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 20,
-              ),
-              width: double.infinity,
-              height: 0.3,
-              color: Theme.of(context).primaryColor,
-            ),
-          ],
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Select Dates"),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: ElevatedButton(
-                  onPressed: () {
-                    pickDateRange();
-                  },
-                  child: Text("${_start.year}/${_start.month}/${_start.day}")),
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            differenceDays.inDays != 0
-                ? Text(
-                    '${differenceDays.inDays.toString()} days selected',
-                    style: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold),
-                  )
-                : const Text(""),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20, top: 5),
-              width: double.infinity,
-              height: 0.3,
-              color: Theme.of(context).primaryColor,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      "${double.parse(widget.rentPrice) * differenceDays.inDays} RWF",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    const Text("Total Payments"),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      stepper.next();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Make Payment"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25)),
-                        primary: Theme.of(context).primaryColor),
+    print(clientCode);
+    return stepper.step == 1
+        ? PaymentWidget(clientCode)
+        : Container(
+            height: MediaQuery.of(context).size.height * 0.37,
+            margin: const EdgeInsets.all(20),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              const Text(
+                                "Get Space",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              Text(widget.productTitle)
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "${double.parse(widget.rentPrice)} RWF",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              const Text("Rent Payment"),
+                            ],
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 20,
+                        ),
+                        width: double.infinity,
+                        height: 0.3,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ],
                   ),
-                )
-              ],
-            ),
-          ],
-        )
-      ]),
-    );
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Select Dates"),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              pickDateRange();
+                            },
+                            child: Text(
+                                "${_start.year}/${_start.month}/${_start.day}")),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      differenceDays.inDays != 0
+                          ? Text(
+                              '${differenceDays.inDays.toString()} days selected',
+                              style: const TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold),
+                            )
+                          : const Text(""),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 20, top: 5),
+                        width: double.infinity,
+                        height: 0.3,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "${double.parse(widget.rentPrice) * differenceDays.inDays} RWF",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              const Text("Total Payments"),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                stepper.next();
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text("Make Payment"),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25)),
+                                  primary: Theme.of(context).primaryColor),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ]),
+          );
   }
 
   Future pickDateRange() async {

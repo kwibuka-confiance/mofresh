@@ -9,7 +9,7 @@ class UserTaskWidget extends StatelessWidget {
 
   void logoutHandler(BuildContext context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.remove('username');
+    pref.remove('token');
     pref.setString("logged", "loggedOut");
     Navigator.of(context).pushReplacementNamed('/login');
   }
@@ -18,7 +18,7 @@ class UserTaskWidget extends StatelessWidget {
     if (id == '1') {
       Navigator.of(context).pushNamed("/dashboard");
     }
-    if (id == '3') {
+    if (id == '4') {
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(

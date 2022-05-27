@@ -47,20 +47,8 @@ class _SignUpStartedState extends State<SignUpStarted> {
                 _userInformation.password,
                 _userInformation.location,
                 _userInformation.businessType)
-            .then((result) {
-          setState(() {
-            isLoading = true;
-          });
-        }).whenComplete(() {
-          setState(() {
-            isLoading = false;
-          });
-          Navigator.of(context).pushNamed("/home");
-        }).onError((error, stackTrace) {
-          setState(() {
-            isLoading = false;
-          });
-          print(error);
+            .then((value) {
+          Navigator.of(context).pushReplacementNamed("/home");
         });
       }
     }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PaymentWidget extends StatefulWidget {
-  const PaymentWidget({Key? key}) : super(key: key);
+  String clientCode;
+  PaymentWidget(this.clientCode, {Key? key}) : super(key: key);
 
   @override
   State<PaymentWidget> createState() => _PaymentWidgetState();
@@ -23,15 +24,14 @@ class _PaymentWidgetState extends State<PaymentWidget> {
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const[
-                const Text(
+              children: const [
+                Text(
                   "Total",
                   style: TextStyle(fontSize: 20),
                 ),
                 Text(
                   'RWF 2300 000',
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

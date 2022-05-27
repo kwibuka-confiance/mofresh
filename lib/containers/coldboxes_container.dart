@@ -17,6 +17,7 @@ class ColdBoxesContainer extends StatefulWidget {
 
 class _ColdBoxesContainerState extends State<ColdBoxesContainer> {
   void console(args) => print(args);
+
   bool isLoading = false;
   final List<ColdBox> coldBoxes = [];
 
