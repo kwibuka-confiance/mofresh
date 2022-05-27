@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/provider/UI.dart';
 import 'package:mofresh/provider/auth.dart';
-import 'package:mofresh/utils/URL.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
-
-import 'package:http/http.dart' as http;
 
 class SignUpStarted extends StatefulWidget {
   const SignUpStarted({Key? key}) : super(key: key);
@@ -39,19 +36,32 @@ class _SignUpStartedState extends State<SignUpStarted> {
       var validateForm = _form.currentState!.validate();
       _form.currentState!.save();
 
-      if (!validateForm) {
-        stepper.next();
-      }
-      if (validateForm) {
-        Provider.of<Auth>(context, listen: false).signUp(
-            "Kwibuka Confiance swift",
-            "078354834",
-            "test@test.com",
-            "2343534",
-            "63563456",
-            "pa6ssword",
-            "kig4ali",
-            "indiv4idual");
+      if (validateForm && stepper.step == 1) {
+        Provider.of<Auth>(context, listen: false)
+            .signUp(
+                "${_userInformation.firstName} ${_userInformation.lastName}",
+                _userInformation.phoneNumber,
+                _userInformation.email,
+                _userInformation.username,
+                _userInformation.clientTin,
+                _userInformation.password,
+                _userInformation.location,
+                _userInformation.businessType)
+            .then((result) {
+          setState(() {
+            isLoading = true;
+          });
+        }).whenComplete(() {
+          setState(() {
+            isLoading = false;
+          });
+          Navigator.of(context).pushNamed("/home");
+        }).onError((error, stackTrace) {
+          setState(() {
+            isLoading = false;
+          });
+          print(error);
+        });
       }
     }
 
@@ -81,11 +91,19 @@ class _SignUpStartedState extends State<SignUpStarted> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Your Informations",
-                            style: TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.bold),
-                          ),
+                          stepper.step == 1
+                              ? const Text(
+                                  "More Informations",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              : const Text(
+                                  "Your Informations",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.bold),
+                                ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 20.0),
                             child: Text(
@@ -214,7 +232,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             305)),
-                                                labelText: 'Enter email',
+                                                labelText: 'Your email',
                                                 suffixIcon:
                                                     const Icon(Icons.email),
                                                 labelStyle: const TextStyle(
@@ -277,7 +295,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             305)),
-                                                labelText: 'Enter phone number',
+                                                labelText: 'Your phone number',
                                                 suffixIcon:
                                                     const Icon(Icons.phone),
                                                 labelStyle: const TextStyle(
@@ -509,13 +527,13 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           TextFormField(
-                                            keyboardType: TextInputType.phone,
+                                            // keyboardType: TextInputType.phone,
                                             decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             305)),
-                                                labelText: 'Enter phone number',
+                                                labelText: 'Your Location',
                                                 suffixIcon:
                                                     const Icon(Icons.phone),
                                                 labelStyle: const TextStyle(
@@ -529,7 +547,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                 TextInputAction.next,
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return 'Fill the phone number';
+                                                return 'Fill the Location';
                                               }
 
                                               return null;
@@ -545,7 +563,8 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                       email: _userInformation
                                                           .email,
                                                       phoneNumber:
-                                                          value.toString(),
+                                                          _userInformation
+                                                              .phoneNumber,
                                                       password: _userInformation
                                                           .password,
                                                       businessType:
@@ -554,8 +573,8 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                       clientTin:
                                                           _userInformation
                                                               .clientTin,
-                                                      location: _userInformation
-                                                          .location,
+                                                      location:
+                                                          value.toString(),
                                                       username: _userInformation
                                                           .username);
                                             },
@@ -575,7 +594,7 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             305)),
-                                                labelText: 'Enter password',
+                                                labelText: 'Username',
                                                 suffixIcon:
                                                     const Icon(Icons.lock),
                                                 labelStyle: const TextStyle(
@@ -590,10 +609,9 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                             onFieldSubmitted: (_) {
                                               _continue();
                                             },
-                                            obscureText: true,
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return 'Fill the password';
+                                                return 'Fill Username';
                                               }
 
                                               return null;
@@ -601,28 +619,23 @@ class _SignUpStartedState extends State<SignUpStarted> {
                                             onSaved: (value) {
                                               _userInformation =
                                                   UserInformations(
-                                                      firstName:
-                                                          _userInformation
-                                                              .firstName,
-                                                      lastName: _userInformation
-                                                          .lastName,
-                                                      email: _userInformation
-                                                          .email,
-                                                      phoneNumber:
-                                                          _userInformation
-                                                              .phoneNumber,
-                                                      password:
-                                                          value.toString(),
-                                                      businessType:
-                                                          _userInformation
-                                                              .businessType,
-                                                      clientTin:
-                                                          _userInformation
-                                                              .clientTin,
-                                                      location: _userInformation
-                                                          .location,
-                                                      username: _userInformation
-                                                          .username);
+                                                firstName:
+                                                    _userInformation.firstName,
+                                                lastName:
+                                                    _userInformation.lastName,
+                                                email: _userInformation.email,
+                                                phoneNumber: _userInformation
+                                                    .phoneNumber,
+                                                password:
+                                                    _userInformation.password,
+                                                businessType: _userInformation
+                                                    .businessType,
+                                                clientTin:
+                                                    _userInformation.clientTin,
+                                                location:
+                                                    _userInformation.location,
+                                                username: value.toString(),
+                                              );
                                             },
                                           ),
                                         ],
@@ -643,31 +656,88 @@ class _SignUpStartedState extends State<SignUpStarted> {
                 SizedBox(
                   width: double.infinity,
                   child: Container(
-                    child: ElevatedButton(
-                      onPressed: _continue,
-                      child: isLoading == false
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 18),
-                              child: Text(
-                                stepper.step == 1 ? "Sign Up" : "Continue",
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Poppins',
-                                    fontSize: 18),
+                    width: double.infinity,
+                    child: stepper.step == 0
+                        ? ElevatedButton(
+                            onPressed:
+                                stepper.step == 0 ? stepper.next : _continue,
+                            child: isLoading == false
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 18,
+                                    ),
+                                    child: isLoading
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : Text(
+                                            stepper.step == 1
+                                                ? "Sign Up"
+                                                : "Continue",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: 'Poppins',
+                                                fontSize: 18),
+                                          ),
+                                  )
+                                : const SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)),
+                                primary: Theme.of(context).primaryColor),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        stepper.previous();
+                                      },
+                                      icon: const Icon(Icons.arrow_back),
+                                    ),
+                                    const Text("Back")
+                                  ],
+                                ),
                               ),
-                            )
-                          : const SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
+                              ElevatedButton(
+                                onPressed: _continue,
+                                child: isLoading == false
+                                    ? Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 18, horizontal: 30),
+                                        child: Text(
+                                          stepper.step == 1
+                                              ? "Sign Up"
+                                              : "Continue",
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18),
+                                        ),
+                                      )
+                                    : const SizedBox(
+                                        width: 15,
+                                        height: 15,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    primary: Theme.of(context).primaryColor),
                               ),
-                            ),
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          primary: Theme.of(context).primaryColor),
-                    ),
+                            ],
+                          ),
                   ),
                 ),
                 InkWell(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:mofresh/utils/URL.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
   final url = '${Mofresh.url2}addClient2';
@@ -35,8 +36,11 @@ class Auth with ChangeNotifier {
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
+        var result = await response.stream.bytesToString();
       } else {
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString(
+            "token", "806|iNwUgyugo5vXSNlWPhdAErZQwCMGH986FVeKuYhD");
         print(response.reasonPhrase);
       }
       notifyListeners();

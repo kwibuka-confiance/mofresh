@@ -13,7 +13,7 @@ import 'package:mofresh/widgets/sections.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -32,8 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final List<Widget> _page = [
       const HomeScreenL(),
-      // const StorageHubScreen(),
-      // const MoFreshMarketScreen(),
       const MoreProductScreen(),
       const MarketScreen(),
       const ProfileScreen()

@@ -42,9 +42,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late String routeNameGlobal = '/welcomes';
-  late String usernameG = '';
-  late String statusG = '';
-  late String contactG = '';
+  late String tokenGlobal = '';
 
   @override
   void initState() {
@@ -54,20 +52,15 @@ class _MyAppState extends State<MyApp> {
 
   getAvailableTokenHandler() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    final String? username = pref.getString('username');
-    final String? status = pref.getString('status');
-    final String? contact = pref.getString('contact');
-    final String? logged = pref.getString("logged");
+    final String? token = pref.getString('token');
 
     setState(() {
-      usernameG = username!;
-      statusG = status!;
-      contactG = contact!;
+      tokenGlobal = token!;
     });
 
     routeDefined() {
       String routeName = '/welcomes';
-      if (usernameG.isNotEmpty) {
+      if (tokenGlobal.isNotEmpty) {
         return "/home";
       }
       return routeName;
@@ -82,9 +75,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     print(routeNameGlobal);
     MaterialColor primayColor = MaterialColor(0xFF00802b, color);
-    print(contactG);
-    print(usernameG);
-    print(statusG);
 
     return MultiProvider(
       providers: [
