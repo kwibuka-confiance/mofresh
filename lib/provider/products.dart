@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mofresh/models/coldBox.dart';
 import 'package:mofresh/models/plates.dart';
 import 'package:mofresh/models/products.dart';
 import 'package:mofresh/utils/URL.dart';
-import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:http/http.dart' as http;
 
 class Products with ChangeNotifier {
@@ -34,41 +32,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  List<Plate> _plateItems = [
-    // Plate(
-    //     id: "1",
-    //     storageName: "Plate 1",
-    //     plateDescription:
-    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-    //     buyPrice: "50000",
-    //     rentPrice: "5000",
-    //     maxTemperature: "-35",
-    //     platePicture: "img/dX11CLnQ7VCdKRo8iM3FA63rpfcMNaCSIWd0RGrj.png",
-    //     plateType: "Blue",
-    //     storageCode: "CS-620FBDDCC5F6E"),
-    // Plate(
-    //     id: "2",
-    //     storageName: "Plate 2",
-    //     plateDescription:
-    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-    //     buyPrice: "55000",
-    //     rentPrice: "5500",
-    //     maxTemperature: "-45",
-    //     platePicture: "img/8QbBvezD3ByHrDsBqaWPgKspXDKmWOIDdMWbvn9t.png",
-    //     plateType: "Blue",
-    //     storageCode: "CS-620FBDDCC5F6E"),
-    // Plate(
-    //     id: "3",
-    //     storageName: "Plate 3",
-    //     plateDescription:
-    //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitiamolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit ",
-    //     buyPrice: "70000",
-    //     rentPrice: "6400",
-    //     maxTemperature: "-55",
-    //     platePicture: "img/5CX5lpBayfDZzvkkLxYMYgyjf79dPc8zkJSjwlIi.png",
-    //     plateType: "Blue",
-    //     storageCode: "CS-620FBDDCC5F6E")
-  ];
+  List<Plate> _plateItems = [];
 
   ///Fetching Plates
 

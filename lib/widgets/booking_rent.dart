@@ -17,8 +17,8 @@ class BookingOrRent extends StatelessWidget {
           )),
           context: context,
           builder: (_) {
-            // return  ProductRent(boxData.name,boxData.rentPrice);
-            return HubRentSpace('productTitle', '12000');
+           
+            return const HubRentSpace('productTitle', '12000');
           });
     }
 

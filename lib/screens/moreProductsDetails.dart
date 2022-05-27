@@ -194,7 +194,7 @@ class MoreProductWidget extends StatelessWidget {
                   Row(
                     children: [
                       const CircleAvatar(
-                        child: Text("H"),
+                        child: Text("M"),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

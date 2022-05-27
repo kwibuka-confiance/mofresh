@@ -1,7 +1,7 @@
 class Plate {
   String id;
   String plateType;
-  String storageCode;
+  String storageCode; 
   String plateDescription;
   String maxTemperature;
   String buyPrice;

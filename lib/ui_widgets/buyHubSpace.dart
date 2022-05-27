@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mofresh/provider/UI.dart';
+import 'package:mofresh/ui_widgets/paymentHub.dart';
+import 'package:provider/provider.dart';
 
 class HubRentSpace extends StatefulWidget {
   final String rentPrice;
   final String productTitle;
-  const HubRentSpace( this.productTitle,this.rentPrice, {Key? key}) : super(key: key);
+  const HubRentSpace(this.productTitle, this.rentPrice, {Key? key})
+      : super(key: key);
 
   @override
   State<HubRentSpace> createState() => _HubRentSpaceState();
@@ -18,12 +22,14 @@ class _HubRentSpaceState extends State<HubRentSpace> {
 
   @override
   Widget build(BuildContext context) {
+    final stepper = Provider.of<UI>(context);
+
     final _start = dateTimeRange.start;
     final _end = dateTimeRange.end;
     final differenceDays = dateTimeRange.duration;
 
     print(DateTime.now().month);
-    return Container(
+    return stepper.step == 1 ? const PaymentWidget() : Container(
       height: MediaQuery.of(context).size.height * 0.37,
       margin: const EdgeInsets.all(20),
       child:
@@ -34,8 +40,8 @@ class _HubRentSpaceState extends State<HubRentSpace> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
-                  children:  [
-                   const Text(
+                  children: [
+                    const Text(
                       "Get Space",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -77,7 +83,6 @@ class _HubRentSpaceState extends State<HubRentSpace> {
                   },
                   child: Text("${_start.year}/${_start.month}/${_start.day}")),
             ),
-            
           ],
         ),
         Column(
@@ -112,7 +117,9 @@ class _HubRentSpaceState extends State<HubRentSpace> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      stepper.next();
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text("Make Payment"),

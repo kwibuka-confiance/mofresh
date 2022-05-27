@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mofresh/containers/booking_containers/picking_booking_status_container.dart';
+import 'package:mofresh/provider/UI.dart';
+import 'package:mofresh/provider/auth.dart';
 import 'package:mofresh/provider/cart.dart';
 import 'package:mofresh/screens/booking_screen.dart';
 import 'package:mofresh/screens/box_product_screen.dart';
@@ -26,7 +28,6 @@ import 'package:mofresh/utils/colors/colorswitch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './provider/products.dart';
 import 'package:provider/provider.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -85,12 +86,19 @@ class _MyAppState extends State<MyApp> {
     print(usernameG);
     print(statusG);
 
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(
-      create: (ctx)=>Products(),),
-      ChangeNotifierProvider(
-      create: (ctx)=>Cart(),)
-    ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Products(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => UI(),
+        ),
+        ChangeNotifierProvider(create: (context) => Auth())
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'MoFresh',
@@ -106,19 +114,23 @@ class _MyAppState extends State<MyApp> {
           "/login": (context) => const Login(),
           "/home": (context) => const HomeScreen(),
           '/dashboard': (context) => const DashboardScreen(),
-          "/cold-box-description": (context) => const ColdBoxDescriptionScreen(),
+          "/cold-box-description": (context) =>
+              const ColdBoxDescriptionScreen(),
           "/booking-screen-status": (context) => const ChoosingBookingStatus(),
           "/booking-screen": (context) => const BookingScreen(),
           "/mofresh-market": (context) => const MoFreshMarketScreen(),
-          "/mofresh-market-details": (context) => const MarketBoxDetailsScreen(),
+          "/mofresh-market-details": (context) =>
+              const MarketBoxDetailsScreen(),
           CartScreen.routeName: (context) => const CartScreen(),
           "/payment-sucess": (context) => const SuccessfulyScreen(),
           DashboardScreen.routeName: (context) => const NotificationScreen(),
-          BuyProductDetailScreen.routeName : (context) => const BuyProductDetailScreen(),
-          HomeScreenL.routeName :(context) => const MoreProductScreen(),
-          ProductDetailsScreenL.routeName : (context)=> const ProductDetailsScreenL(),
-          BoxProductScreen.routeName :(context) => const BoxProductScreen(),
-          StorageHubScreen.routeName :(context) => const StorageHubScreen()
+          BuyProductDetailScreen.routeName: (context) =>
+              const BuyProductDetailScreen(),
+          HomeScreenL.routeName: (context) => const MoreProductScreen(),
+          ProductDetailsScreenL.routeName: (context) =>
+              const ProductDetailsScreenL(),
+          BoxProductScreen.routeName: (context) => const BoxProductScreen(),
+          StorageHubScreen.routeName: (context) => const StorageHubScreen()
         },
       ),
     );
